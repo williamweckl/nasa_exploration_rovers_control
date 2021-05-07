@@ -143,6 +143,23 @@ defmodule NasaExplorationRoversControl.ExplorationRover do
     |> validate_commands()
   end
 
+  @doc """
+  Clears an existing exploration rover given commands.
+
+  ## Examples
+
+      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N", commands: ["L"]}
+      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.clear_commands()
+      {:ok, %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N", commands: []}}
+
+      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N", commands: ["L","M","R"]}
+      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.clear_commands()
+      {:ok, %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N", commands: []}}
+  """
+  def clear_commands(exploration_rover) do
+    {:ok, %ExplorationRover{exploration_rover | commands: []}}
+  end
+
   defp validate_commands({:ok, %ExplorationRover{commands: commands} = exploration_rover})
     when is_list(commands) and length(commands) > 0 do
     case validate_each_command(commands) do

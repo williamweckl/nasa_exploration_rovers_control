@@ -6,6 +6,53 @@ defmodule NasaExplorationRoversControl do
   alias NasaExplorationRoversControl.ExplorationRover
 
   @doc """
+  Executes an exploration rover given commands.
+  The result of this function will be the exploration rover with new direction and position.
+
+  This function also clears the exploration rover commands, as it has already been executed.
+
+  ## Examples
+
+      iex> execute_exploration_rover_commands(%#{ExplorationRover}{position: {0,0}, direction: "N", commands: ["M"]})
+      {:ok, %#{ExplorationRover}{position: {0,1}, direction: "N"}}
+
+      iex> execute_exploration_rover_commands(%#{ExplorationRover}{position: {1,2}, direction: "N", commands: ["L", "M", "L", "M", "L", "M", "L", "M", "M"]})
+      {:ok, %#{ExplorationRover}{position: {1,3}, direction: "N"}}
+
+      iex> execute_exploration_rover_commands(%#{ExplorationRover}{position: {3,3}, direction: "E", commands: ["M", "M", "R", "M", "M", "R", "M", "R", "R", "M"]})
+      {:ok, %#{ExplorationRover}{position: {5,1}, direction: "E"}}
+
+      iex> execute_exploration_rover_commands(%#{ExplorationRover}{position: {0,0}, direction: "N", commands: []})
+      {:error, "Exploration rover has not commands to be executed."}
+
+      iex> execute_exploration_rover_commands(%#{ExplorationRover}{position: {0,0}, direction: "W", commands: ["M"]})
+      {:error, "Invalid position. Coordinates must not be negative."}
+  """
+  def execute_exploration_rover_commands(
+    %ExplorationRover{commands: commands} = exploration_rover
+  ) when length(commands) > 0 do
+    result = Enum.reduce(commands, {:ok, exploration_rover}, fn command, acc ->
+      case acc do
+        {:ok, exploration_rover_to_be_changed} ->
+          case command do
+            "M" -> move_exploration_rover(exploration_rover_to_be_changed)
+            "L" -> rotate_exploration_rover(exploration_rover_to_be_changed, "L")
+            "R" -> rotate_exploration_rover(exploration_rover_to_be_changed, "R")
+          end
+        _ -> acc
+      end
+    end)
+
+    case result do
+      {:ok, exploration_rover} ->
+        ExplorationRover.clear_commands(exploration_rover)
+      _ ->
+        result
+    end
+  end
+  def execute_exploration_rover_commands(_), do: {:error, "Exploration rover has not commands to be executed."}
+
+  @doc """
   Rotates an exploration rover.
   The result of this function will be the exploration rover with a new direction.
 
