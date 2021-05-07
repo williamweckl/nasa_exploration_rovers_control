@@ -2,9 +2,10 @@ defmodule NasaExplorationRoversControl.ExplorationRover do
   @moduledoc """
   Exploration Rover entity, it represents a real exploration rover that is exploring another planet.
 
-  It has two attributes, both required:
-  - position: A tuble with x and y axis.
-  - direction: A direction according to the Wind Rose Compass (in English) represented by a single character string. Valid values are N, S, W, E.
+  It has three attributes:
+  - position (required): A tuble with x and y axis.
+  - direction (required): A direction according to the Wind Rose Compass (in English) represented by a single character string. Valid values are N, S, W, E.
+  - commands: A list of commands to be performed by rover. Valid values for each command in the list are L (left), R (right) or M (move).
 
   ## Examples
 
@@ -24,11 +25,12 @@ defmodule NasaExplorationRoversControl.ExplorationRover do
   alias NasaExplorationRoversControl.ExplorationRover
 
   @enforce_keys [:position, :direction]
-  defstruct position: {0, 0}, direction: "N"
+  defstruct position: {0, 0}, direction: "N", commands: []
 
   @type t() :: %__MODULE__{
     position: Tuple.t(),
-    direction: String.t()
+    direction: String.t(),
+    commands: List.t()
   }
 
   @doc """
@@ -86,13 +88,72 @@ defmodule NasaExplorationRoversControl.ExplorationRover do
   defp validate_position({:ok, %ExplorationRover{position: position} = exploration_rover}) when is_tuple(position) do
     {:ok, exploration_rover}
   end
-  defp validate_position(_exploration_rover), do: {:error, "Invalid position. Must be a tuple."}
+  defp validate_position(_result), do: {:error, "Invalid position. Must be a tuple."}
 
   defp validate_direction({:error, error}), do: {:error, error}
   defp validate_direction({:ok, %ExplorationRover{direction: direction} = exploration_rover})
-  when direction in ["N", "S", "W", "E"] do
+    when direction in ["N", "S", "W", "E"] do
     {:ok, exploration_rover}
   end
-  defp validate_direction(_exploration_rover), do: {:error, "Invalid direction. Must be N,S,W or E."}
+  defp validate_direction(_result), do: {:error, "Invalid direction. Must be N,S,W or E."}
+
+  @doc """
+  Adds commands to an existing exploration rover.
+  Each command will be validated to match a valid command that can be L (left), R (right) or M (move).
+
+  ## Examples
+
+      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
+      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.give_commands(["L"])
+      {:ok, %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N", commands: ["L"]}}
+
+      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
+      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.give_commands(["L", "L", "R"])
+      {:ok, %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N", commands: ["L", "L", "R"]}}
+
+      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
+      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.give_commands([])
+      {:error, "Commands list must not be empty."}
+
+      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
+      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.give_commands("string")
+      {:error, "Commands must be a list."}
+
+      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
+      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.give_commands(["I"])
+      {:error, "Command I is invalid. Must be L, R or M."}
+
+      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
+      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.give_commands(["L","M","P"])
+      {:error, "Command P is invalid. Must be L, R or M."}
+  """
+  def give_commands(exploration_rover, commands) do
+    {:ok, %ExplorationRover{exploration_rover | commands: commands}}
+    |> validate_commands()
+  end
+
+  defp validate_commands({:ok, %ExplorationRover{commands: commands} = exploration_rover})
+    when is_list(commands) and length(commands) > 0 do
+    case validate_each_command(commands) do
+      :ok -> {:ok, exploration_rover}
+      validation_result -> validation_result
+    end
+  end
+  defp validate_commands({:ok, %ExplorationRover{commands: commands}}) when is_list(commands) do
+    {:error, "Commands list must not be empty."}
+  end
+  defp validate_commands(_result), do: {:error, "Commands must be a list."}
+
+  defp validate_each_command(commands) do
+    invalid_command = Enum.find(commands, fn (command) -> !valid_command?(command) end)
+    if invalid_command do
+      {:error, "Command #{invalid_command} is invalid. Must be L, R or M."}
+    else
+      :ok
+    end
+  end
+
+  defp valid_command?(command) when command in ["L", "R", "M"], do: true
+  defp valid_command?(_command), do: false
 
 end
