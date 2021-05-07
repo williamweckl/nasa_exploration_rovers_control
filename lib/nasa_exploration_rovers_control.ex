@@ -100,6 +100,9 @@ defmodule NasaExplorationRoversControl do
 
       iex> move_exploration_rover(%#{ExplorationRover}{position: {0,0}, direction: "W"})
       {:error, "Invalid position. Coordinates must not be negative."}
+
+      iex> move_exploration_rover(%#{ExplorationRover}{position: {0,0}, direction: "I"})
+      ** (RuntimeError) Exploration rover has an invalid direction
   """
   def move_exploration_rover(
     %ExplorationRover{position: current_position, direction: current_direction} = exploration_rover
@@ -111,7 +114,7 @@ defmodule NasaExplorationRoversControl do
       "S" -> {x, y - 1}
       "W" -> {x - 1, y}
       "E" -> {x + 1, y}
-      _ -> raise "Exploration rover has an invalid direction" # TODO: FALTOU ESSE TESTE
+      _ -> raise "Exploration rover has an invalid direction"
     end
 
     ExplorationRover.change_position(exploration_rover, new_position)
