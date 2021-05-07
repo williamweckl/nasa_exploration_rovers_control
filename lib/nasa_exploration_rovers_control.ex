@@ -65,4 +65,50 @@ defmodule NasaExplorationRoversControl do
   end
   def rotate_exploration_rover(_exploration_rover, _direction), do: {:error, "Invalid direction."}
 
+  @doc """
+  Moves an exploration rover according to its current direction.
+  The result of this function will be the exploration rover with a new position.
+
+  ## Examples
+
+      iex> move_exploration_rover(%#{ExplorationRover}{position: {0,0}, direction: "N"})
+      {:ok, %#{ExplorationRover}{position: {0,1}, direction: "N"}}
+
+      iex> move_exploration_rover(%#{ExplorationRover}{position: {0,3}, direction: "N"})
+      {:ok, %#{ExplorationRover}{position: {0,4}, direction: "N"}}
+
+      iex> move_exploration_rover(%#{ExplorationRover}{position: {0,3}, direction: "S"})
+      {:ok, %#{ExplorationRover}{position: {0,2}, direction: "S"}}
+
+      iex> move_exploration_rover(%#{ExplorationRover}{position: {0,1}, direction: "S"})
+      {:ok, %#{ExplorationRover}{position: {0,0}, direction: "S"}}
+
+      iex> move_exploration_rover(%#{ExplorationRover}{position: {2,0}, direction: "W"})
+      {:ok, %#{ExplorationRover}{position: {1,0}, direction: "W"}}
+
+      iex> move_exploration_rover(%#{ExplorationRover}{position: {1,0}, direction: "W"})
+      {:ok, %#{ExplorationRover}{position: {0,0}, direction: "W"}}
+
+      iex> move_exploration_rover(%#{ExplorationRover}{position: {3,0}, direction: "E"})
+      {:ok, %#{ExplorationRover}{position: {4,0}, direction: "E"}}
+
+      iex> move_exploration_rover(%#{ExplorationRover}{position: {0,0}, direction: "E"})
+      {:ok, %#{ExplorationRover}{position: {1,0}, direction: "E"}}
+  """
+  def move_exploration_rover(
+    %ExplorationRover{position: current_position, direction: current_direction} = exploration_rover
+  ) do
+    {x, y} = current_position
+
+    new_position = case current_direction do
+      "N" -> {x, y + 1}
+      "S" -> {x, y - 1}
+      "W" -> {x - 1, y}
+      "E" -> {x + 1, y}
+      _ -> raise "Exploration rover has an invalid direction"
+    end
+
+    ExplorationRover.change_position(exploration_rover, new_position)
+  end
+
 end

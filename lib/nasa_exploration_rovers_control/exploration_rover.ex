@@ -179,4 +179,27 @@ defmodule NasaExplorationRoversControl.ExplorationRover do
     |> validate_direction()
   end
 
+  @doc """
+  Changes existent exploration rover position.
+
+  ## Examples
+
+      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
+      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.change_position({3,3})
+      {:ok, %NasaExplorationRoversControl.ExplorationRover{position: {3,3}, direction: "N"}}
+
+      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "S"}
+      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.change_position({1,4})
+      {:ok, %NasaExplorationRoversControl.ExplorationRover{position: {1,4}, direction: "S"}}
+
+      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "S"}
+      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.change_position(123)
+      {:error, "Invalid position. Must be a tuple."}
+
+  """
+  def change_position(%ExplorationRover{} = exploration_rover, new_position) do
+    {:ok, %ExplorationRover{exploration_rover | position: new_position}}
+    |> validate_position()
+  end
+
 end
