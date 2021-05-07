@@ -45,6 +45,12 @@ defmodule NasaExplorationRoversControl.ExplorationRover do
       iex> NasaExplorationRoversControl.ExplorationRover.new(position: {3,5}, direction: "S")
       {:ok, %NasaExplorationRoversControl.ExplorationRover{position: {3,5}, direction: "S"}}
 
+      iex> NasaExplorationRoversControl.ExplorationRover.new(position: {-1,0}, direction: "E")
+      {:error, "Invalid position. Coordinates must not be negative."}
+
+      iex> NasaExplorationRoversControl.ExplorationRover.new(position: {0,-1}, direction: "E")
+      {:error, "Invalid position. Coordinates must not be negative."}
+
       iex> NasaExplorationRoversControl.ExplorationRover.new(position: "string", direction: "E")
       {:error, "Invalid position. Must be a tuple."}
 
@@ -86,7 +92,12 @@ defmodule NasaExplorationRoversControl.ExplorationRover do
   end
 
   defp validate_position({:ok, %ExplorationRover{position: position} = exploration_rover}) when is_tuple(position) do
-    {:ok, exploration_rover}
+    {x, y} = position
+    if x < 0 || y < 0 do
+      {:error, "Invalid position. Coordinates must not be negative."}
+    else
+      {:ok, exploration_rover}
+    end
   end
   defp validate_position(_result), do: {:error, "Invalid position. Must be a tuple."}
 
@@ -191,6 +202,10 @@ defmodule NasaExplorationRoversControl.ExplorationRover do
       iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "S"}
       ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.change_position({1,4})
       {:ok, %NasaExplorationRoversControl.ExplorationRover{position: {1,4}, direction: "S"}}
+
+      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "S"}
+      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.change_position({-1,4})
+      {:error, "Invalid position. Coordinates must not be negative."}
 
       iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "S"}
       ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.change_position(123)
