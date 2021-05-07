@@ -1,8 +1,5 @@
 defmodule NasaExplorationRoversControlTest do
   use ExUnit.Case
-  doctest NasaExplorationRoversControl
+  doctest NasaExplorationRoversControl, import: true
 
-  test "greets the world" do
-    assert NasaExplorationRoversControl.hello() == :world
-  end
 end

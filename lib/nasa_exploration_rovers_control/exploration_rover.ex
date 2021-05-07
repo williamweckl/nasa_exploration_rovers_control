@@ -156,4 +156,27 @@ defmodule NasaExplorationRoversControl.ExplorationRover do
   defp valid_command?(command) when command in ["L", "R", "M"], do: true
   defp valid_command?(_command), do: false
 
+  @doc """
+  Changes existent exploration rover direction.
+
+  ## Examples
+
+      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
+      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.change_direction("W")
+      {:ok, %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "W"}}
+
+      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "S"}
+      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.change_direction("E")
+      {:ok, %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "E"}}
+
+      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "S"}
+      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.change_direction("I")
+      {:error, "Invalid direction. Must be N,S,W or E."}
+
+  """
+  def change_direction(%ExplorationRover{} = exploration_rover, new_direction) do
+    {:ok, %ExplorationRover{exploration_rover | direction: new_direction}}
+    |> validate_direction()
+  end
+
 end
