@@ -38,56 +38,61 @@ defmodule NasaExplorationRoversControl.ExplorationRover do
   ## Examples
 
       iex> NasaExplorationRoversControl.ExplorationRover.new(position: {10,3}, direction: "W")
-      %NasaExplorationRoversControl.ExplorationRover{position: {10,3}, direction: "W"}
+      {:ok, %NasaExplorationRoversControl.ExplorationRover{position: {10,3}, direction: "W"}}
 
       iex> NasaExplorationRoversControl.ExplorationRover.new(position: {3,5}, direction: "S")
-      %NasaExplorationRoversControl.ExplorationRover{position: {3,5}, direction: "S"}
+      {:ok, %NasaExplorationRoversControl.ExplorationRover{position: {3,5}, direction: "S"}}
 
       iex> NasaExplorationRoversControl.ExplorationRover.new(position: "string", direction: "E")
-      ** (RuntimeError) Invalid position
+      {:error, "Invalid position. Must be a tuple."}
 
       iex> NasaExplorationRoversControl.ExplorationRover.new(position: 123, direction: "N")
-      ** (RuntimeError) Invalid position
+      {:error, "Invalid position. Must be a tuple."}
 
       iex> NasaExplorationRoversControl.ExplorationRover.new(position: [], direction: "N")
-      ** (RuntimeError) Invalid position
+      {:error, "Invalid position. Must be a tuple."}
 
       iex> NasaExplorationRoversControl.ExplorationRover.new(position: %{}, direction: "N")
-      ** (RuntimeError) Invalid position
+      {:error, "Invalid position. Must be a tuple."}
 
       iex> NasaExplorationRoversControl.ExplorationRover.new(position: {0,0}, direction: "invalid")
-      ** (RuntimeError) Invalid direction
+      {:error, "Invalid direction. Must be N,S,W or E."}
 
       iex> NasaExplorationRoversControl.ExplorationRover.new(position: {0,0}, direction: "I")
-      ** (RuntimeError) Invalid direction
+      {:error, "Invalid direction. Must be N,S,W or E."}
 
       iex> NasaExplorationRoversControl.ExplorationRover.new(position: {0,0}, direction: "P")
-      ** (RuntimeError) Invalid direction
+      {:error, "Invalid direction. Must be N,S,W or E."}
 
       iex> NasaExplorationRoversControl.ExplorationRover.new(position: {0,0}, direction: 123)
-      ** (RuntimeError) Invalid direction
+      {:error, "Invalid direction. Must be N,S,W or E."}
 
       iex> NasaExplorationRoversControl.ExplorationRover.new(position: {0,0}, direction: [])
-      ** (RuntimeError) Invalid direction
+      {:error, "Invalid direction. Must be N,S,W or E."}
 
       iex> NasaExplorationRoversControl.ExplorationRover.new(position: {0,0}, direction: {})
-      ** (RuntimeError) Invalid direction
+      {:error, "Invalid direction. Must be N,S,W or E."}
 
       iex> NasaExplorationRoversControl.ExplorationRover.new(position: {0,0}, direction: %{})
-      ** (RuntimeError) Invalid direction
+      {:error, "Invalid direction. Must be N,S,W or E."}
 
   """
   def new(position: position, direction: direction) do
-    validate_position!(position)
-    validate_direction!(direction)
-
-    %ExplorationRover{position: position, direction: direction}
+    {:ok, %ExplorationRover{position: position, direction: direction}}
+    |> validate_position()
+    |> validate_direction()
   end
 
-  defp validate_position!(position) when is_tuple(position), do: :ok
-  defp validate_position!(_position), do: raise "Invalid position"
+  defp validate_position({:ok, %ExplorationRover{position: position} = exploration_rover}) when is_tuple(position) do
+    {:ok, exploration_rover}
+  end
+  defp validate_position(_exploration_rover), do: {:error, "Invalid position. Must be a tuple."}
 
-  defp validate_direction!(direction) when direction in ["N", "S", "W", "E"], do: :ok
-  defp validate_direction!(_direction), do: raise "Invalid direction"
+  defp validate_direction({:error, error}), do: {:error, error}
+  defp validate_direction({:ok, %ExplorationRover{direction: direction} = exploration_rover})
+  when direction in ["N", "S", "W", "E"] do
+    {:ok, exploration_rover}
+  end
+  defp validate_direction(_exploration_rover), do: {:error, "Invalid direction. Must be N,S,W or E."}
 
 end
