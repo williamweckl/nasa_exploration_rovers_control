@@ -27,7 +27,8 @@ defmodule NasaExplorationRoversControl.Interactors.ExecuteExplorationRoverComman
       {:error, "Invalid position. Coordinates must not be negative."} ->
         {
           :error,
-          "The system prevented the exploration rover from leaving the ground. Check the commands and try again."
+          "The system prevented the exploration rover from leaving the ground. " <>
+          "Check the commands and try again. The exploration rover was kept in the initial position and direction."
         }
       _ ->
         result
