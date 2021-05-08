@@ -6,6 +6,134 @@ defmodule NasaExplorationRoversControl do
   alias NasaExplorationRoversControl.ExplorationRover
 
   @doc """
+  Interpret exploration commands input file, returning a readable map.
+
+  ## Examples
+
+      iex> interpret_exploration_commands_input_file("priv/commands_input_files/mars/exploration_attempt_1_by_kayla_barron_2030_05_08")
+      {:ok, %{
+        ground_size: {5,5},
+        exploration_rovers: [
+          %#{ExplorationRover}{position: {1,2}, direction: "N", commands: ["L", "M", "L", "M", "L", "M", "L", "M", "M"]},
+          %#{ExplorationRover}{position: {3,3}, direction: "E", commands: ["M", "M", "R", "M", "M", "R", "M", "R", "R", "M"]}
+        ]
+      }}
+
+      iex> interpret_exploration_commands_input_file("priv/commands_input_files/mars/exploration_attempt_2_by_zena_cardman_2030_05_09")
+      {:ok, %{
+        ground_size: {3,8},
+        exploration_rovers: [
+          %#{ExplorationRover}{position: {0,0}, direction: "N", commands: ["M", "M", "M"]},
+          %#{ExplorationRover}{position: {3,8}, direction: "N", commands: ["L", "M", "M", "M"]}
+        ]
+      }}
+
+      iex> interpret_exploration_commands_input_file("invalid")
+      {:error, "File path is invalid."}
+
+  """
+  def interpret_exploration_commands_input_file(file_path) do
+    result = file_path
+    |> File.read!()
+    |> String.split("\n")
+    |> split_file_content_into_ground_size_and_exploration_rovers()
+    |> parse_ground_size()
+    |> parse_exploration_rovers()
+    |> validate_exploration_rovers_is_not_an_empty_list()
+
+    case result do
+      {:error, _error} -> result
+      _result -> {:ok, result}
+    end
+  rescue
+    File.Error ->
+      {:error, "File path is invalid."}
+  end
+
+  defp split_file_content_into_ground_size_and_exploration_rovers(file_content) do
+    [ground_size | tail] = file_content
+    %{ground_size: ground_size, exploration_rovers: tail}
+  end
+
+  defp parse_ground_size(%{ground_size: ground_size} = input) when is_binary(ground_size) do
+    input
+      |> Map.put(:ground_size, ground_size |> String.split(" "))
+      |> parse_ground_size()
+  end
+  defp parse_ground_size(%{ground_size: ground_size} = input) when is_list(ground_size) and length(ground_size) == 2 do
+    [ground_size_x, ground_size_y] = ground_size
+    ground_size = normalize_coordinates({ground_size_x, ground_size_y})
+
+    input
+      |> Map.put(:ground_size, ground_size)
+  end
+  defp parse_ground_size(_), do: {:error, "Ground size is invalid."}
+
+  defp parse_exploration_rovers(%{exploration_rovers: exploration_rovers} = input) do
+    exploration_rovers = exploration_rovers
+      |> Enum.with_index()
+      |> Enum.reduce([], fn {row, index}, acc ->
+        if is_exploration_rover_position_row?(index) do
+          case exploration_rovers |> Enum.at(index + 1) |> parse_exploration_rover_commands_string() do
+            {:ok, commands} ->
+              case parse_exploration_rover_position_and_direction(row) do
+                {:ok, [x, y, direction]} ->
+                  {:ok, exploration_rover} = ExplorationRover.new(position: normalize_coordinates({x,y}), direction: direction)
+
+                  exploration_rover = case exploration_rover |> ExplorationRover.give_commands(commands) do
+                    {:ok, exploration_rover} -> exploration_rover
+                    result -> result
+                  end
+
+                  acc ++ [exploration_rover] # Order is important
+                result ->
+                  acc ++ [result] # Order is important
+              end
+            result ->
+              acc ++ [result] # Order is important
+          end
+        else
+          acc
+        end
+      end)
+
+    input
+    |> Map.put(:exploration_rovers, exploration_rovers)
+  end
+  defp parse_exploration_rovers(error_result), do: error_result
+
+  defp validate_exploration_rovers_is_not_an_empty_list(%{exploration_rovers: exploration_rovers})
+    when length(exploration_rovers) == 0 do
+    {:error, "Exploration rovers list is empty."}
+  end
+  defp validate_exploration_rovers_is_not_an_empty_list(%{exploration_rovers: _exploration_rovers} = input), do: input
+  defp validate_exploration_rovers_is_not_an_empty_list(error_result), do: error_result
+
+  defp is_exploration_rover_position_row?(row_index) do
+    # The even rows defines the exploration rover positions
+    rem(row_index, 2) == 0
+  end
+
+  defp normalize_coordinates({x, y}) do
+    {String.to_integer(x), String.to_integer(y)}
+  end
+
+  defp parse_exploration_rover_commands_string(commands_string) when is_binary(commands_string) do
+    {:ok, commands_string |> String.codepoints}
+  end
+  defp parse_exploration_rover_commands_string(nil), do: {:error, "Commands list must not be empty."}
+
+  defp parse_exploration_rover_position_and_direction(position_and_direction) when is_binary(position_and_direction) do
+    position_and_direction |> String.split(" ") |> parse_exploration_rover_position_and_direction()
+  end
+  defp parse_exploration_rover_position_and_direction(position_and_direction)
+    when is_list(position_and_direction) and length(position_and_direction) == 3 do
+    [x, y, direction] = position_and_direction
+    {:ok, [x, y, direction]}
+  end
+  defp parse_exploration_rover_position_and_direction(_), do: {:error, "Position or direction are invalid."}
+
+  @doc """
   Executes an exploration rover given commands.
   The result of this function will be the exploration rover with new direction and position.
 
@@ -27,6 +155,9 @@ defmodule NasaExplorationRoversControl do
 
       iex> execute_exploration_rover_commands(%#{ExplorationRover}{position: {0,0}, direction: "W", commands: ["M"]})
       {:error, "Invalid position. Coordinates must not be negative."}
+
+      iex> execute_exploration_rover_commands(%#{ExplorationRover}{position: {0,0}, direction: "W", commands: ["I"]})
+      ** (RuntimeError) Exploration rover has an invalid command: I
   """
   def execute_exploration_rover_commands(
     %ExplorationRover{commands: commands} = exploration_rover
@@ -38,6 +169,7 @@ defmodule NasaExplorationRoversControl do
             "M" -> move_exploration_rover(exploration_rover_to_be_changed)
             "L" -> rotate_exploration_rover(exploration_rover_to_be_changed, "L")
             "R" -> rotate_exploration_rover(exploration_rover_to_be_changed, "R")
+            _ -> raise "Exploration rover has an invalid command: #{command}"
           end
         _ -> acc
       end

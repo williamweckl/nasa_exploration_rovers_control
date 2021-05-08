@@ -132,11 +132,11 @@ defmodule NasaExplorationRoversControl.ExplorationRover do
 
       iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
       ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.give_commands(["I"])
-      {:error, "Command I is invalid. Must be L, R or M."}
+      {:error, "Command `I` is invalid. Must be L, R or M."}
 
       iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
       ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.give_commands(["L","M","P"])
-      {:error, "Command P is invalid. Must be L, R or M."}
+      {:error, "Command `P` is invalid. Must be L, R or M."}
   """
   def give_commands(exploration_rover, commands) do
     {:ok, %ExplorationRover{exploration_rover | commands: commands}}
@@ -175,7 +175,7 @@ defmodule NasaExplorationRoversControl.ExplorationRover do
   defp validate_each_command(commands) do
     invalid_command = Enum.find(commands, fn (command) -> !valid_command?(command) end)
     if invalid_command do
-      {:error, "Command #{invalid_command} is invalid. Must be L, R or M."}
+      {:error, "Command `#{invalid_command}` is invalid. Must be L, R or M."}
     else
       :ok
     end
