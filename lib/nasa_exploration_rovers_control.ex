@@ -57,7 +57,7 @@ defmodule NasaExplorationRoversControl do
       {:error, "Exploration rover has not commands to be executed."}
 
       iex> execute_exploration_rover_commands(%#{ExplorationRover}{position: {0,0}, direction: "W", commands: ["M"]})
-      {:error, "Invalid position. Coordinates must not be negative."}
+      {:error, "The system prevented the exploration rover from leaving the ground. Check the commands and try again."}
 
       iex> execute_exploration_rover_commands(%#{ExplorationRover}{position: {0,0}, direction: "W", commands: ["I"]})
       ** (RuntimeError) Exploration rover has an invalid command: I

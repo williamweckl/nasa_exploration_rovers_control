@@ -24,6 +24,11 @@ defmodule NasaExplorationRoversControl.Interactors.ExecuteExplorationRoverComman
     case result do
       {:ok, exploration_rover} ->
         ExplorationRover.clear_commands(exploration_rover)
+      {:error, "Invalid position. Coordinates must not be negative."} ->
+        {
+          :error,
+          "The system prevented the exploration rover from leaving the ground. Check the commands and try again."
+        }
       _ ->
         result
     end
