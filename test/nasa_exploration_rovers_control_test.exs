@@ -6,6 +6,25 @@ defmodule NasaExplorationRoversControlTest do
   alias NasaExplorationRoversControl.ExplorationRover
   alias NasaExplorationRoversControl.Interactors
 
+  describe "explore_celestial_body_using_commands_from_file/2" do
+    test "calls the right interactor" do
+      with_mock(
+        Interactors.ExploreCelestialBodyUsingCommandsFromFile,
+        [
+          perform: fn(_celestial_body_name, _input_file) -> {:ok, %{}} end
+        ]
+      ) do
+        celestial_body_name = "fake celestial body name"
+        input_file = "fake input file"
+        assert NasaExplorationRoversControl.explore_celestial_body_using_commands_from_file(
+          celestial_body_name, input_file
+        ) == {:ok, %{}}
+
+        assert_called Interactors.ExploreCelestialBodyUsingCommandsFromFile.perform(celestial_body_name, input_file)
+      end
+    end
+  end
+
   describe "interpret_exploration_commands_input_file/1" do
     test "calls the right interactor" do
       with_mock(

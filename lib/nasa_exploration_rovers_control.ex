@@ -4,6 +4,50 @@ defmodule NasaExplorationRoversControl do
   """
 
   alias NasaExplorationRoversControl.ExplorationRover
+  alias NasaExplorationRoversControl.Interactors
+
+  @doc """
+  Use the commands instructions from file to interact with the exploration rovers.
+  The output is a map containing the ground size and all the exploration rovers with their new positions and directions.
+
+  The outputed exploration rovers will have it's commands cleared, as it has already been executed.
+
+  This use case also validates if any of the exploration rovers would leave the grounded area by the commands given and will output an error instead of the exploration rover at the list if that's the case.
+
+  ## Examples
+
+      iex> explore_celestial_body_using_commands_from_file("mars", "priv/commands_input_files/mars/exploration_attempt_2_by_zena_cardman_2030_05_09")
+      {:ok, %{
+        ground_size: {3,8},
+        exploration_rovers: [
+          %#{ExplorationRover}{position: {0,3}, direction: "N", commands: []},
+          %#{ExplorationRover}{position: {0,8}, direction: "W", commands: []}
+        ]
+      }}
+
+      iex> explore_celestial_body_using_commands_from_file("mars", "priv/commands_input_files/mars/exploration_attempt_3_by_raja_chari_2030_05_11")
+      {:ok, %{
+        ground_size: {3,8},
+        exploration_rovers: [
+          %#{ExplorationRover}{position: {0,4}, direction: "N", commands: []},
+          %#{ExplorationRover}{position: {0,8}, direction: "W", commands: []},
+          {:error, "The system prevented the exploration rover from leaving the ground. Check the commands and try again. The exploration rover was kept in the initial position and direction."},
+          %#{ExplorationRover}{position: {1,1}, direction: "W", commands: []},
+          {:error, "The system prevented the exploration rover from leaving the ground. Check the commands and try again. The exploration rover was kept in the initial position and direction."},
+          {:error, "The system prevented the exploration rover from leaving the ground. Check the commands and try again. The exploration rover was kept in the initial position and direction."},
+        ]
+      }}
+
+      iex> explore_celestial_body_using_commands_from_file("mars", "priv/commands_input_files/mars/exploration_attempt_1_by_kayla_barron_2030_05_08")
+      {:error, "The terrain of mars is rectangular and the value entered is a square. Please check your commands."}
+
+      iex> explore_celestial_body_using_commands_from_file("moon", "priv/commands_input_files/mars/exploration_attempt_2_by_zena_cardman_2030_05_09")
+      {:error, "Celestial Body is not mapped to be explored yet."}
+
+  """
+  def explore_celestial_body_using_commands_from_file(celestial_body_name, file_path) do
+    Interactors.ExploreCelestialBodyUsingCommandsFromFile.perform(celestial_body_name, file_path)
+  end
 
   @doc """
   Interpret exploration commands input file, returning a readable map.
@@ -33,7 +77,7 @@ defmodule NasaExplorationRoversControl do
 
   """
   def interpret_exploration_commands_input_file(file_path) do
-    NasaExplorationRoversControl.Interactors.InterpretExplorationCommandsInputFile.perform(file_path)
+    Interactors.InterpretExplorationCommandsInputFile.perform(file_path)
   end
 
   @doc """
@@ -63,7 +107,7 @@ defmodule NasaExplorationRoversControl do
       ** (RuntimeError) Exploration rover has an invalid command: I
   """
   def execute_exploration_rover_commands(%ExplorationRover{} = exploration_rover) do
-    NasaExplorationRoversControl.Interactors.ExecuteExplorationRoverCommands.perform(exploration_rover)
+    Interactors.ExecuteExplorationRoverCommands.perform(exploration_rover)
   end
 
   @doc """
@@ -103,7 +147,7 @@ defmodule NasaExplorationRoversControl do
       ** (RuntimeError) Exploration rover has an invalid direction
   """
   def rotate_exploration_rover(%ExplorationRover{} = exploration_rover, direction) do
-    NasaExplorationRoversControl.Interactors.RotateExplorationRover.perform(exploration_rover, direction)
+    Interactors.RotateExplorationRover.perform(exploration_rover, direction)
   end
 
   @doc """
@@ -146,7 +190,7 @@ defmodule NasaExplorationRoversControl do
       ** (RuntimeError) Exploration rover has an invalid direction
   """
   def move_exploration_rover(%ExplorationRover{} = exploration_rover) do
-    NasaExplorationRoversControl.Interactors.MoveExplorationRover.perform(exploration_rover)
+    Interactors.MoveExplorationRover.perform(exploration_rover)
   end
 
 end
