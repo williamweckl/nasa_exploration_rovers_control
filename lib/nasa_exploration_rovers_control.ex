@@ -69,30 +69,15 @@ defmodule NasaExplorationRoversControl do
   end
   defp parse_ground_size(_), do: {:error, "Ground size is invalid."}
 
-  defp parse_exploration_rovers(%{exploration_rovers: exploration_rovers} = input) do
-    exploration_rovers = exploration_rovers
+  defp parse_exploration_rovers(%{exploration_rovers: raw_exploration_rovers} = input) do
+    exploration_rovers = raw_exploration_rovers
       |> Enum.with_index()
       |> Enum.reduce([], fn {row, index}, acc ->
         if is_exploration_rover_position_row?(index) do
-          case exploration_rovers |> Enum.at(index + 1) |> parse_exploration_rover_commands_string() do
-            {:ok, commands} ->
-              case parse_exploration_rover_position_and_direction(row) do
-                {:ok, [x, y, direction]} ->
-                  {:ok, exploration_rover} = ExplorationRover.new(position: normalize_coordinates({x,y}), direction: direction)
-
-                  exploration_rover = case exploration_rover |> ExplorationRover.give_commands(commands) do
-                    {:ok, exploration_rover} -> exploration_rover
-                    result -> result
-                  end
-
-                  acc ++ [exploration_rover] # Order is important
-                result ->
-                  acc ++ [result] # Order is important
-              end
-            result ->
-              acc ++ [result] # Order is important
-          end
+          row
+          |> parse_exploration_rover_row(index, raw_exploration_rovers, acc)
         else
+          # Skip commands rows that are appended to exploration rovers
           acc
         end
       end)
@@ -101,6 +86,23 @@ defmodule NasaExplorationRoversControl do
     |> Map.put(:exploration_rovers, exploration_rovers)
   end
   defp parse_exploration_rovers(error_result), do: error_result
+
+  defp parse_exploration_rover_row(row, row_index, raw_exploration_rovers, exploration_rovers) do
+    next_line = raw_exploration_rovers |> Enum.at(row_index + 1)
+
+    result = row
+    |> parse_exploration_rover_position_and_direction()
+    |> parse_exploration_rover_commands_string(next_line)
+    |> initialize_exploration_rover()
+    |> give_commands_to_exploration_rover()
+
+    normalized_result = case result do
+      {:ok, exploration_rover} -> exploration_rover
+      result -> result
+    end
+
+    exploration_rovers ++ [normalized_result] # Order is important
+  end
 
   defp validate_exploration_rovers_is_not_an_empty_list(%{exploration_rovers: exploration_rovers})
     when length(exploration_rovers) == 0 do
@@ -118,20 +120,38 @@ defmodule NasaExplorationRoversControl do
     {String.to_integer(x), String.to_integer(y)}
   end
 
-  defp parse_exploration_rover_commands_string(commands_string) when is_binary(commands_string) do
-    {:ok, commands_string |> String.codepoints}
-  end
-  defp parse_exploration_rover_commands_string(nil), do: {:error, "Commands list must not be empty."}
-
   defp parse_exploration_rover_position_and_direction(position_and_direction) when is_binary(position_and_direction) do
     position_and_direction |> String.split(" ") |> parse_exploration_rover_position_and_direction()
   end
   defp parse_exploration_rover_position_and_direction(position_and_direction)
     when is_list(position_and_direction) and length(position_and_direction) == 3 do
     [x, y, direction] = position_and_direction
-    {:ok, [x, y, direction]}
+    {:ok, %{position: normalize_coordinates({x,y}), direction: direction}}
   end
   defp parse_exploration_rover_position_and_direction(_), do: {:error, "Position or direction are invalid."}
+
+  defp parse_exploration_rover_commands_string({:ok, input}, commands_string) when is_binary(commands_string) do
+    commands = commands_string |> String.codepoints
+    input = input |> Map.put(:commands, commands)
+
+    {:ok, input}
+  end
+  defp parse_exploration_rover_commands_string({:ok, _}, nil), do: {:error, "Commands list must not be empty."}
+  defp parse_exploration_rover_commands_string({:error, _} = result, _commands_string), do: result
+
+  defp initialize_exploration_rover({:ok, %{position: position, direction: direction} = input}) do
+    {:ok, exploration_rover} = ExplorationRover.new(position: position, direction: direction)
+
+    {:ok, %{exploration_rover: exploration_rover, input: input}}
+  end
+  defp initialize_exploration_rover(result), do: result
+
+  defp give_commands_to_exploration_rover(
+    {:ok, %{exploration_rover: exploration_rover, input: %{commands: commands}}}
+  ) do
+    exploration_rover |> ExplorationRover.give_commands(commands)
+  end
+  defp give_commands_to_exploration_rover(result), do: result
 
   @doc """
   Executes an exploration rover given commands.
