@@ -1,4 +1,7 @@
 defmodule NasaExplorationRoversControlTerminalInterface.FinalStep do
+  @moduledoc """
+  This module contains for the final step at the interaction with the terminal interface.
+  """
 
   import NasaExplorationRoversControlTerminalInterface.IO
 
@@ -11,6 +14,13 @@ defmodule NasaExplorationRoversControlTerminalInterface.FinalStep do
 
   @commands_output_files_path "priv/commands_output_files"
 
+  @doc """
+  Prompts the user if he wants to save the output to a file.
+
+  Receives a state (map) but returns anything and halts the system.
+
+  In case the user confirms, a file will be saved to the system at the path priv/commands_output_files containing the execution output.
+  """
   def show_final_user_options_and_wait_for_interaction(
     %{selected_celestial_body: selected_celestial_body, execution_output: execution_output}
   ) do
