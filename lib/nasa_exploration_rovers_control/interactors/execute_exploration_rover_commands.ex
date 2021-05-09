@@ -7,14 +7,12 @@ defmodule NASAExplorationRoversControl.Interactors.ExecuteExplorationRoverComman
 
   alias NASAExplorationRoversControl.ExplorationRover
 
+  @doc false
   def perform(%ExplorationRover{commands: commands} = exploration_rover) when length(commands) > 0 do
     result = Enum.reduce(commands, {:ok, exploration_rover}, fn command, acc ->
-      case acc do
-        {:ok, exploration_rover_to_be_changed} ->
-          execute_single_exploration_rover_command(exploration_rover_to_be_changed, command)
-        _ ->
-          acc
-      end
+      {:ok, exploration_rover_to_be_changed} = acc
+
+      execute_single_exploration_rover_command(exploration_rover_to_be_changed, command)
     end)
 
     case result do
@@ -26,8 +24,6 @@ defmodule NASAExplorationRoversControl.Interactors.ExecuteExplorationRoverComman
           "The system prevented the exploration rover from leaving the ground. " <>
           "Check the commands and try again. The exploration rover was kept in the initial position and direction."
         }
-      _ ->
-        result
     end
   end
   def perform(_), do: {:error, "Exploration rover has not commands to be executed."}
