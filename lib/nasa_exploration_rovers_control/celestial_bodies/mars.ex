@@ -3,6 +3,21 @@ defmodule NasaExplorationRoversControl.CelestialBodies.Mars do
   Module representing Mars Celestial Body.
   """
 
+  @average_time_for_exploration_rovers_to_receive_commands "8 minutes"
+
+  @doc """
+  Returns the time for Exploration Rovers to receive commands.
+
+  ## Examples
+
+      iex> average_time_for_exploration_rovers_to_receive_commands()
+      "8 minutes"
+
+  """
+  def average_time_for_exploration_rovers_to_receive_commands do
+    @average_time_for_exploration_rovers_to_receive_commands
+  end
+
   @doc """
   Validates if the given instructions are valid for Mars exploration.
 

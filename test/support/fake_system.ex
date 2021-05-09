@@ -6,4 +6,7 @@ defmodule FakeSystem do
   @doc false
   def cmd(_command, _args, _opts), do: :ok
 
+  @doc false
+  def halt(_code), do: :ok
+
 end
