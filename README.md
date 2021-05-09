@@ -172,7 +172,7 @@ $ mix help start_terminal_interface
 $ mix test
 ```
 
-## Updating documentation
+## Generating documentation
 
 ```
 $ mix docs
