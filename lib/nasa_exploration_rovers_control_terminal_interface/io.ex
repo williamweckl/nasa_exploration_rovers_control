@@ -3,7 +3,7 @@ defmodule NASAExplorationRoversControlTerminalInterface.IO do
   This module contains helpers for interacting with the user's terminal.
   """
 
-  @terminal_interface_settings Application.get_env(
+  @terminal_interface_settings Application.compile_env(
     :nasa_exploration_rovers_control,
     NASAExplorationRoversControlTerminalInterface
   )

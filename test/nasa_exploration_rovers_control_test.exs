@@ -49,7 +49,7 @@ defmodule NASAExplorationRoversControlTest do
           perform: fn(_exploration_rover) -> {:ok, %{}} end
         ]
       ) do
-        exploration_rover = %ExplorationRover{position: {0,0}, direction: "N", commands: ["M"]}
+        exploration_rover = %ExplorationRover{position: {0, 0}, direction: "N", commands: ["M"]}
         assert NASAExplorationRoversControl.execute_exploration_rover_commands(exploration_rover) == {:ok, %{}}
 
         assert_called Interactors.ExecuteExplorationRoverCommands.perform(exploration_rover)
@@ -65,7 +65,7 @@ defmodule NASAExplorationRoversControlTest do
           perform: fn(_exploration_rover, _direction) -> {:ok, %{}} end
         ]
       ) do
-        exploration_rover = %ExplorationRover{position: {0,0}, direction: "N", commands: ["M"]}
+        exploration_rover = %ExplorationRover{position: {0, 0}, direction: "N", commands: ["M"]}
         direction = "L"
         assert NASAExplorationRoversControl.rotate_exploration_rover(exploration_rover, direction) == {:ok, %{}}
 
@@ -82,7 +82,7 @@ defmodule NASAExplorationRoversControlTest do
           perform: fn(_exploration_rover) -> {:ok, %{}} end
         ]
       ) do
-        exploration_rover = %ExplorationRover{position: {0,0}, direction: "N", commands: ["M"]}
+        exploration_rover = %ExplorationRover{position: {0, 0}, direction: "N", commands: ["M"]}
         assert NASAExplorationRoversControl.move_exploration_rover(exploration_rover) == {:ok, %{}}
 
         assert_called Interactors.MoveExplorationRover.perform(exploration_rover)

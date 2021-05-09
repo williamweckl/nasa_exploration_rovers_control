@@ -5,7 +5,7 @@ defmodule NASAExplorationRoversControlTerminalInterface.FinalStepTest do
 
   alias NASAExplorationRoversControlTerminalInterface.FinalStep
 
-  @terminal_interface_settings Application.get_env(
+  @terminal_interface_settings Application.compile_env(
     :nasa_exploration_rovers_control,
     NASAExplorationRoversControlTerminalInterface
   )

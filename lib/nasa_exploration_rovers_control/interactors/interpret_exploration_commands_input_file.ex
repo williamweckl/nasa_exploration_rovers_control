@@ -79,8 +79,7 @@ defmodule NASAExplorationRoversControl.Interactors.InterpretExplorationCommandsI
     exploration_rovers ++ [normalized_result] # Order is important
   end
 
-  defp validate_exploration_rovers_is_not_an_empty_list(%{exploration_rovers: exploration_rovers})
-    when length(exploration_rovers) == 0 do
+  defp validate_exploration_rovers_is_not_an_empty_list(%{exploration_rovers: []}) do
     {:error, "Exploration rovers list is empty."}
   end
   defp validate_exploration_rovers_is_not_an_empty_list(%{exploration_rovers: _exploration_rovers} = input), do: input
@@ -101,7 +100,7 @@ defmodule NASAExplorationRoversControl.Interactors.InterpretExplorationCommandsI
   defp parse_exploration_rover_position_and_direction(position_and_direction)
     when is_list(position_and_direction) and length(position_and_direction) == 3 do
     [x, y, direction] = position_and_direction
-    {:ok, %{position: normalize_coordinates({x,y}), direction: direction}}
+    {:ok, %{position: normalize_coordinates({x, y}), direction: direction}}
   end
   defp parse_exploration_rover_position_and_direction(_), do: {:error, "Position or direction are invalid."}
 

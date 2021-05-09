@@ -148,7 +148,7 @@ The system was tested on Linux, but probably will work on MacOS and Windows too.
 
 ## Getting Started
 
-1. Install the project dependencies. The project has only 2 dependencies: `mock` that is being used for mocking at tests and `ex_doc` that was used to generate the documentation.
+1. Install the project dependencies. The project has only 3 dependencies: `mock` that is being used for mocking at tests; `ex_doc` that was used to generate the documentation; `credo` used as code linter.
 
 ```
 $ mix deps.get
@@ -176,6 +176,12 @@ $ mix test
 
 ```
 $ mix docs
+```
+
+## Running linter
+
+```
+$ mix credo
 ```
 
 ## Config

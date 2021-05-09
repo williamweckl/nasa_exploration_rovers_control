@@ -37,6 +37,7 @@ defmodule NASAExplorationRoversControl.MixProject do
     [
       {:mock, "~> 0.3.0", only: :test},
       {:ex_doc, "~> 0.24", only: :dev, runtime: false},
+      {:credo, "~> 1.5", only: [:dev, :test], runtime: false}
     ]
   end
 end

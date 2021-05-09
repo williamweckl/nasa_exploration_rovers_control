@@ -5,7 +5,7 @@ defmodule NASAExplorationRoversControlTerminalInterface.CommandsExecutorTest do
 
   alias NASAExplorationRoversControlTerminalInterface.CommandsExecutor
 
-  @terminal_interface_settings Application.get_env(
+  @terminal_interface_settings Application.compile_env(
     :nasa_exploration_rovers_control,
     NASAExplorationRoversControlTerminalInterface
   )
