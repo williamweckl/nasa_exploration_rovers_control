@@ -150,7 +150,7 @@ The system was tested on Linux, but probably will work on MacOS and Windows too.
 
 ## Getting Started
 
-1. Install the project dependencies. The project has only 4 dependencies: `mock` that is being used for mocking at tests; `ex_doc` that was used to generate the documentation; `credo` used as code linter; `excoveralls` for test coverage checks.
+1. Install the project dependencies. The project has 5 dependencies: `mock` that is being used for mocking at tests; `ex_doc` that was used to generate the documentation; `credo` used as code linter; `excoveralls` for test coverage checks; `junit_formatter` used for properly store CI artifacts.
 
 ```
 $ mix deps.get

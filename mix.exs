@@ -39,7 +39,8 @@ defmodule NASAExplorationRoversControl.MixProject do
       {:mock, "~> 0.3.0", only: :test},
       {:ex_doc, "~> 0.24", only: :dev, runtime: false},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
-      {:excoveralls, "~> 0.13", only: :test, runtime: false}
+      {:excoveralls, "~> 0.13", only: :test, runtime: false},
+      {:junit_formatter, "~> 3.2", only: [:test]} # Used for CI artifacts
     ]
   end
 end

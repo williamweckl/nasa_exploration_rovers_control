@@ -61,7 +61,7 @@ jobs:
       - run: mix compile
 
       - run: mix credo
-      - run: mix test
+      - run: mix coveralls.html
 
       - save_cache:
           key: v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
@@ -73,6 +73,12 @@ jobs:
             - _build
             - .elixir_ls
             - ~/.mix
+
+      - store_test_results:  # upload junit test results for display in Test Summary
+          path: /usr/app/_build/test/lib/nasa_exploration_rovers_control
+      - store_artifacts:
+          path: /usr/app/cover
+          destination: coverage_results
 
       - persist_to_workspace:
           root: /usr/app
