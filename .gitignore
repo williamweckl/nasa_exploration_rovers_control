@@ -25,3 +25,7 @@ nasa_exploration_rovers_control-*.tar
 
 # Temporary files for e.g. tests
 /tmp
+
+
+# Exploration Rovers movement outputs
+/priv/commands_output_files

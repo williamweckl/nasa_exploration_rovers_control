@@ -6,6 +6,7 @@ config :nasa_exploration_rovers_control, NasaExplorationRoversControlTerminalInt
   typing_effect_print_time: 30,
   user_reading_time: 2000,
   io_module: IO,
+  file_module: File,
   timer_module: :timer,
   system_module: System
 
