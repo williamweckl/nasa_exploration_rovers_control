@@ -30,7 +30,7 @@ This files also has to include at the first line the ground size. This is import
 
 It seems a little complex, but don't worry if you make some mistakes when writing this file, the system can handle most of them. But you will have a chance to review the instructions before confirming the submission.
 
-This confirmation is important because the commands after being sent take about 8 minutes to reach the probes if you are exploring Mars.
+This confirmation is important because the commands after being sent take about 8 minutes to reach the rovers if you are exploring Mars.
 
 ### The commands input file
 
@@ -57,9 +57,28 @@ LMMM (Rover 2 commands to be performed)
 ... (And so on, you can add many rovers as you want, the system can take care of it)
 ```
 
+### The output
+
+The output has in each line the new rover predicted position and direction (remember that it takes some time to the rovers to receive the commads, and the output will not wait for it).
+
+Example:
+
+```
+0 3 N
+0 8 W
+```
+
+Explaining the example:
+
+```
+0 3 N (Rover 1 new predicted position and direction)
+0 8 W (Rover 2 new predicted position and direction)
+... (And so on)
+```
+
 ### The interface to interact
 
-To interact with the system, for now we have a terminal interface. You can run using your favorite linux terminal. Maybe it works on Windows and Mac too, but has not been tested.
+To interact with the system, for now we have a terminal interface but other ways can be added latter (see the architecture decisions section). You can run using your favorite linux terminal. Maybe it works on Windows and Mac too, but has not been tested.
 
 ![Terminal Interface 1](https://raw.githubusercontent.com/williamweckl/nasa_exploration_rovers_control/master/priv/readme_images/terminal_interface_1.png)
 
@@ -73,11 +92,51 @@ To interact with the system, for now we have a terminal interface. You can run u
 
 ## Architecture decisions
 
-TBD
+Most of the architecture decisions was followed by conventions from Clean Architecture.
+
+Clean architecture helps to isolate the business logic from the rest and let us developer to focus on what really matters, the business.
+
+There is a clear separation between these two points of view in the project folder:
+
+- `lib/nasa_exploration_rovers_control` is for the business logic
+- `lib/nasa_exploration_rovers_control_terminal_interface` is for the terminal interface, our delivery mechanism. Is the way our users will interact with the business logic
+
+At the business logic part, the file `lib/nasa_exploration_rovers_control.ex` is responsible to expose all the system use cases according to the business view for the product. This layer is known as our bounded context. It defined the boundaries, this should be the only file called by the delivery mechanisms.
+
+At `lib/nasa_exploration_rovers_control/interactors` we can find all the use cases and it's rules.
+
+`lib/exploration_rover` is our entity, that represents a real Exploration Rover from the real world.
+
+Another structure that was made, following another patterns, was the folder `lib/nasa_exploration_rovers_control/celestial_bodies` that contains all the specific celestial bodies business rules, like the rule that validates that the `Mars` ground is rectangular.
+
+There is also another folder that worth to mention that is `lib/mix/tasks`. This folder just followed the Elixir conventions to create an automated task to start some things. We are using for now just to start our terminal interface.
+
+## Use cases
+
+- Explore Celestial Body Using Commands From File
+- Interpret Exploration Commands Input File
+- Execute Exploration Rover Commands
+- Rotate Exploration Rover
+- Move Exploration Rover
+
+You can see all of them with their docs and some examples in the file `lib/nasa_exploration_rovers_control.ex`.
+
+### Entities
+
+#### Exploration Rover
+
+Exploration Rover entity, it represents a real exploration rover that is exploring another planet or satellite.
+
+It has three attributes:
+- position (required): A tuble with x and y axis.
+- direction (required): A direction according to the Wind Rose Compass represented by a single character string. Valid values are N, S, W, E.
+- commands: A list of commands to be performed by rover. Valid values for each command in the list are L (left), R (right) or M (move).
+
+It also has a bunch of validations to prevent invalid values to be placed in these attributes.
 
 ## Some other ~~crazy~~ decisions
 
-- I've created a structure of **celestial bodies** to keep some specific logics. For now there's just `Mars`, but other celestial bodies can be easily added in the future. After all, after conquering Mars, we won't want to stop here, will we?
+- A structure of **celestial bodies** was created to keep some specific logics. For now there's just `Mars`, but other celestial bodies can be easily added in the future. After all, after conquering Mars, we won't want to stop here, will we?
 - `Mars` also has a specific characteristic of having its grounds to be explored as being rectangular highlands, so a specific Mars validation has been added to not allow square grounds.
 - Some fake modules was created to be able to mock some Elixir and Erlang modules like `System` and `:timer`. The decision of which module will be used is made by the environment (see `config` folder files). The default is to use the language modules, but this default is overwriten by the test environment.
 
@@ -128,10 +187,11 @@ We encourage you to contribute to NASA Exploration Rovers Control! Just submit a
 
 Wanna contribute and don't know where to start? There are some cool features in my mind:
 
-- The terminal interface could have the option to also receive the input commands by STDIO instead of only reading from file
-- The terminal interface could print the commands that will be performed in a more readable format too
+- Prevent exploration rovers colisions
+- The terminal interface could have the option to also receive the input commands by STDIO instead of only reading from files
+- The terminal interface could print the commands that will be performed in a more readable and humanized format, this could help to prevent some mistakes
 
-If you liked those ideas feel free to open a feature request issue. :stuck_out_tongue:
+If you liked those ideas feel free to open a feature request issue or a PR. :stuck_out_tongue:
 
 ## Wtf?!
 
