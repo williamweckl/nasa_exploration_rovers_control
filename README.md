@@ -96,14 +96,14 @@ To interact with the system, for now we have a terminal interface but other ways
 
 Most of the architecture decisions was followed by conventions from Clean Architecture.
 
-Clean architecture helps to isolate the business logic from the rest and let us developer to focus on what really matters, the business.
+Clean architecture helps to isolate the business logic from the rest and let us developers to focus on what really matters, the business.
 
 There is a clear separation between these two points of view in the project folder:
 
 - `lib/nasa_exploration_rovers_control` is for the business logic
 - `lib/nasa_exploration_rovers_control_terminal_interface` is for the terminal interface, our delivery mechanism. Is the way our users will interact with the business logic
 
-At the business logic part, the file `lib/nasa_exploration_rovers_control.ex` is responsible to expose all the system use cases according to the business view for the product. This layer is known as our bounded context. It defined the boundaries, this should be the only file called by the delivery mechanisms.
+At the business logic part, the file `lib/nasa_exploration_rovers_control.ex` is responsible to expose all the system use cases according to the business view for the product. This layer is known as our bounded context. It defines the boundaries, this should be the only file called by the delivery mechanisms.
 
 At `lib/nasa_exploration_rovers_control/interactors` we can find all the use cases and it's rules.
 
@@ -140,7 +140,7 @@ It also has a bunch of validations to prevent invalid values to be placed in the
 
 - A structure of **celestial bodies** was created to keep some specific logics. For now there's just `Mars`, but other celestial bodies can be easily added in the future. After all, after conquering Mars, we won't want to stop here, will we?
 - `Mars` also has a specific characteristic of having its grounds to be explored as being rectangular highlands, so a specific Mars validation has been added to not allow square grounds.
-- Some fake modules was created to be able to mock some Elixir and Erlang modules like `System` and `:timer`. The decision of which module will be used is made by the environment (see `config` folder files). The default is to use the language modules, but this default is overwriten by the test environment.
+- Some fake modules was created to be able to mock some Elixir and Erlang modules like `System` and `:timer`. The decision of which module will be used is made by the environment (see `config` folder files). The default is to use the language modules, but this default is overwriten at the test environment.
 
 ## Requirements
 
