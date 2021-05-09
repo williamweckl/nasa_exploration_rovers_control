@@ -1,5 +1,7 @@
 # NASA Exploration Rovers Control
 
+[![NASA Exploration Rovers Control](https://circleci.com/gh/williamweckl/nasa_exploration_rovers_control.svg?style=svg)](https://circleci.com/gh/williamweckl/nasa_exploration_rovers_control)
+
 System designed to control exploration rovers.
 
 ## Motivation
