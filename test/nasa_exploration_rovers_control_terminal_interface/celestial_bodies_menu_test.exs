@@ -37,7 +37,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.CelestialBodiesMenuTest 
       end
     end
 
-    test "shows menu to user and persist state after user has chosen an invalid option" do
+    test "shows menu to user and retries after user has chosen an invalid option" do
       with_mocks([
         {
           NasaExplorationRoversControlTerminalInterface.IO,
@@ -84,7 +84,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.CelestialBodiesMenuTest 
       end
     end
 
-    test "shows menu to user and persist state after user has chosen an invalid string option" do
+    test "shows menu to user and retries after user has chosen an invalid string option" do
       with_mocks([
         {
           NasaExplorationRoversControlTerminalInterface.IO,
@@ -144,7 +144,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.CelestialBodiesMenuTest 
           break_line: fn -> :ok end
         ]
       ) do
-        new_state = CelestialBodiesMenu.show_menu_and_wait_for_user_interaction(%{})
+        new_state = CelestialBodiesMenu.retry(%{})
 
         assert new_state == %{selected_celestial_body: %{code: "mars", id: 1, label: "Mars"}}
       end
