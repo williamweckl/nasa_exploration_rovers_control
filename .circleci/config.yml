@@ -31,7 +31,7 @@ aliases:
   - &install_linux_dependencies
     run:
       name: install linux dependencies
-      command: apk add git
+      command: apk add git openssh-client
 
 jobs:
   test:
