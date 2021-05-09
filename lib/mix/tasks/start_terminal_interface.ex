@@ -13,7 +13,7 @@ defmodule Mix.Tasks.StartTerminalInterface do
 
   @impl Mix.Task
   def run(_args) do
-    NasaExplorationRoversControlTerminalInterface.start()
+    NASAExplorationRoversControlTerminalInterface.start()
   end
 
 end

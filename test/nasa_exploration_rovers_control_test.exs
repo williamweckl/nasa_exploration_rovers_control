@@ -1,10 +1,10 @@
-defmodule NasaExplorationRoversControlTest do
+defmodule NASAExplorationRoversControlTest do
   use ExUnit.Case
-  doctest NasaExplorationRoversControl, import: true
+  doctest NASAExplorationRoversControl, import: true
 
   import Mock
-  alias NasaExplorationRoversControl.ExplorationRover
-  alias NasaExplorationRoversControl.Interactors
+  alias NASAExplorationRoversControl.ExplorationRover
+  alias NASAExplorationRoversControl.Interactors
 
   describe "explore_celestial_body_using_commands_from_file/2" do
     test "calls the right interactor" do
@@ -16,7 +16,7 @@ defmodule NasaExplorationRoversControlTest do
       ) do
         celestial_body_name = "fake celestial body name"
         input_file = "fake input file"
-        assert NasaExplorationRoversControl.explore_celestial_body_using_commands_from_file(
+        assert NASAExplorationRoversControl.explore_celestial_body_using_commands_from_file(
           celestial_body_name, input_file
         ) == {:ok, %{}}
 
@@ -34,7 +34,7 @@ defmodule NasaExplorationRoversControlTest do
         ]
       ) do
         input_file = "fake input file"
-        assert NasaExplorationRoversControl.interpret_exploration_commands_input_file(input_file) == {:ok, %{}}
+        assert NASAExplorationRoversControl.interpret_exploration_commands_input_file(input_file) == {:ok, %{}}
 
         assert_called Interactors.InterpretExplorationCommandsInputFile.perform(input_file)
       end
@@ -50,7 +50,7 @@ defmodule NasaExplorationRoversControlTest do
         ]
       ) do
         exploration_rover = %ExplorationRover{position: {0,0}, direction: "N", commands: ["M"]}
-        assert NasaExplorationRoversControl.execute_exploration_rover_commands(exploration_rover) == {:ok, %{}}
+        assert NASAExplorationRoversControl.execute_exploration_rover_commands(exploration_rover) == {:ok, %{}}
 
         assert_called Interactors.ExecuteExplorationRoverCommands.perform(exploration_rover)
       end
@@ -67,7 +67,7 @@ defmodule NasaExplorationRoversControlTest do
       ) do
         exploration_rover = %ExplorationRover{position: {0,0}, direction: "N", commands: ["M"]}
         direction = "L"
-        assert NasaExplorationRoversControl.rotate_exploration_rover(exploration_rover, direction) == {:ok, %{}}
+        assert NASAExplorationRoversControl.rotate_exploration_rover(exploration_rover, direction) == {:ok, %{}}
 
         assert_called Interactors.RotateExplorationRover.perform(exploration_rover, direction)
       end
@@ -83,7 +83,7 @@ defmodule NasaExplorationRoversControlTest do
         ]
       ) do
         exploration_rover = %ExplorationRover{position: {0,0}, direction: "N", commands: ["M"]}
-        assert NasaExplorationRoversControl.move_exploration_rover(exploration_rover) == {:ok, %{}}
+        assert NASAExplorationRoversControl.move_exploration_rover(exploration_rover) == {:ok, %{}}
 
         assert_called Interactors.MoveExplorationRover.perform(exploration_rover)
       end

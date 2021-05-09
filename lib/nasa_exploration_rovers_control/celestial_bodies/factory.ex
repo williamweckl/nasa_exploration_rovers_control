@@ -1,9 +1,9 @@
-defmodule NasaExplorationRoversControl.CelestialBodies.Factory do
+defmodule NASAExplorationRoversControl.CelestialBodies.Factory do
   @moduledoc """
   Factory responsible to interact with inputs and return the Celestial Body module accordingly.
   """
 
-  alias NasaExplorationRoversControl.CelestialBodies
+  alias NASAExplorationRoversControl.CelestialBodies
 
   @doc """
   Use the commands instructions from file to interact with the exploration rovers.
@@ -12,7 +12,7 @@ defmodule NasaExplorationRoversControl.CelestialBodies.Factory do
   ## Examples
 
       iex> get_celestial_body_module("mars")
-      {:ok, NasaExplorationRoversControl.CelestialBodies.Mars}
+      {:ok, NASAExplorationRoversControl.CelestialBodies.Mars}
 
       iex> get_celestial_body_module("moon")
       {:error, "Celestial Body is not mapped to be explored yet."}

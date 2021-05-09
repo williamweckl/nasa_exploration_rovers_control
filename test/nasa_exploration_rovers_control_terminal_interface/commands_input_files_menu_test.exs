@@ -1,9 +1,9 @@
-defmodule NasaExplorationRoversControlTerminalInterface.CommandsInputFilesMenuTest do
+defmodule NASAExplorationRoversControlTerminalInterface.CommandsInputFilesMenuTest do
   use ExUnit.Case
 
   import Mock
 
-  alias NasaExplorationRoversControlTerminalInterface.CommandsInputFilesMenu
+  alias NASAExplorationRoversControlTerminalInterface.CommandsInputFilesMenu
 
   @selected_celestial_body %{
     id: 1,
@@ -14,7 +14,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.CommandsInputFilesMenuTe
   describe "show_menu_and_wait_for_user_interaction/1" do
     test "shows menu to user and persist state after user has chosen first option" do
       with_mock(
-        NasaExplorationRoversControlTerminalInterface.IO,
+        NASAExplorationRoversControlTerminalInterface.IO,
         [
           typing_effect_print: fn(message) -> message end,
           print_message: fn(message) -> message end,
@@ -32,27 +32,27 @@ defmodule NasaExplorationRoversControlTerminalInterface.CommandsInputFilesMenuTe
             "priv/commands_input_files/mars/exploration_attempt_1_by_kayla_barron_2030_05_08"
         }
 
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.clear_screen()
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.clear_screen()
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Nice! Mars is a great Celestial Body! There is a lot of opportunities there!"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "We can perform the instructions of a predefined command input file, " <>
           "or if you wish you can inform another file path from your file system."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "1) exploration_attempt_1_by_kayla_barron_2030_05_08"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "2) exploration_attempt_2_by_zena_cardman_2030_05_09"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "3) exploration_attempt_3_by_raja_chari_2030_05_11"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "4) I prefer to inform another file path"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
           "Which option would be great for you today?"
         )
       end
@@ -60,7 +60,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.CommandsInputFilesMenuTe
 
     test "shows menu to user and persist state after user has chosen third option" do
       with_mock(
-        NasaExplorationRoversControlTerminalInterface.IO,
+        NASAExplorationRoversControlTerminalInterface.IO,
         [
           typing_effect_print: fn(message) -> message end,
           print_message: fn(message) -> message end,
@@ -78,27 +78,27 @@ defmodule NasaExplorationRoversControlTerminalInterface.CommandsInputFilesMenuTe
             "priv/commands_input_files/mars/exploration_attempt_3_by_raja_chari_2030_05_11"
         }
 
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.clear_screen()
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.clear_screen()
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Nice! Mars is a great Celestial Body! There is a lot of opportunities there!"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "We can perform the instructions of a predefined command input file, " <>
           "or if you wish you can inform another file path from your file system."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "1) exploration_attempt_1_by_kayla_barron_2030_05_08"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "2) exploration_attempt_2_by_zena_cardman_2030_05_09"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "3) exploration_attempt_3_by_raja_chari_2030_05_11"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "4) I prefer to inform another file path"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
           "Which option would be great for you today?"
         )
       end
@@ -106,7 +106,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.CommandsInputFilesMenuTe
 
     test "asks for user to input file name when selecting the last option" do
       with_mock(
-        NasaExplorationRoversControlTerminalInterface.IO,
+        NASAExplorationRoversControlTerminalInterface.IO,
         [
           typing_effect_print: fn(message) -> message end,
           print_message: fn(message) -> message end,
@@ -129,30 +129,30 @@ defmodule NasaExplorationRoversControlTerminalInterface.CommandsInputFilesMenuTe
           selected_commands_input_file_path: "my_file_path"
         }
 
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.clear_screen()
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.clear_screen()
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Nice! Mars is a great Celestial Body! There is a lot of opportunities there!"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "We can perform the instructions of a predefined command input file, " <>
           "or if you wish you can inform another file path from your file system."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "1) exploration_attempt_1_by_kayla_barron_2030_05_08"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "2) exploration_attempt_2_by_zena_cardman_2030_05_09"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "3) exploration_attempt_3_by_raja_chari_2030_05_11"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "4) I prefer to inform another file path"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
           "Which option would be great for you today?"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
           "Alright! Let me know the file path then"
         )
       end
@@ -161,7 +161,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.CommandsInputFilesMenuTe
     test "shows menu to user and retries after user has chosen an invalid option" do
       with_mocks([
         {
-          NasaExplorationRoversControlTerminalInterface.IO,
+          NASAExplorationRoversControlTerminalInterface.IO,
           [],
           [
             typing_effect_print: fn(message) -> message end,
@@ -185,34 +185,34 @@ defmodule NasaExplorationRoversControlTerminalInterface.CommandsInputFilesMenuTe
 
         assert new_state == state
 
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.clear_screen()
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.clear_screen()
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Nice! Mars is a great Celestial Body! There is a lot of opportunities there!"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "We can perform the instructions of a predefined command input file, " <>
           "or if you wish you can inform another file path from your file system."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "1) exploration_attempt_1_by_kayla_barron_2030_05_08"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "2) exploration_attempt_2_by_zena_cardman_2030_05_09"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "3) exploration_attempt_3_by_raja_chari_2030_05_11"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "4) I prefer to inform another file path"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
           "Which option would be great for you today?"
         )
 
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Sorry, I did not understand the typed option."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.wait_for_user_reading()
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.wait_for_user_reading()
         assert_called CommandsInputFilesMenu.retry(%{})
       end
     end
@@ -220,7 +220,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.CommandsInputFilesMenuTe
     test "shows menu to user and retries after user has chosen an invalid string option" do
       with_mocks([
         {
-          NasaExplorationRoversControlTerminalInterface.IO,
+          NASAExplorationRoversControlTerminalInterface.IO,
           [],
           [
             typing_effect_print: fn(message) -> message end,
@@ -244,34 +244,34 @@ defmodule NasaExplorationRoversControlTerminalInterface.CommandsInputFilesMenuTe
 
         assert new_state == state
 
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.clear_screen()
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.clear_screen()
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Nice! Mars is a great Celestial Body! There is a lot of opportunities there!"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "We can perform the instructions of a predefined command input file, " <>
           "or if you wish you can inform another file path from your file system."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "1) exploration_attempt_1_by_kayla_barron_2030_05_08"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "2) exploration_attempt_2_by_zena_cardman_2030_05_09"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "3) exploration_attempt_3_by_raja_chari_2030_05_11"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "4) I prefer to inform another file path"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
           "Which option would be great for you today?"
         )
 
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Sorry, I did not understand the typed option."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.wait_for_user_reading()
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.wait_for_user_reading()
         assert_called CommandsInputFilesMenu.retry(%{})
       end
     end
@@ -280,7 +280,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.CommandsInputFilesMenuTe
   describe "retry/1" do
     test "shows menu to user and persist state after user has chosen Mars" do
       with_mock(
-        NasaExplorationRoversControlTerminalInterface.IO,
+        NASAExplorationRoversControlTerminalInterface.IO,
         [
           typing_effect_print: fn(message) -> message end,
           print_message: fn(message) -> message end,

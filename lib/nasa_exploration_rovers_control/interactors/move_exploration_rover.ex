@@ -1,11 +1,11 @@
-defmodule NasaExplorationRoversControl.Interactors.MoveExplorationRover do
+defmodule NASAExplorationRoversControl.Interactors.MoveExplorationRover do
   @moduledoc """
   Use case responsible for move an exploration rover.
 
-  Do not call this module directly, use always the NasaExplorationRoversControl bounded context.
+  Do not call this module directly, use always the NASAExplorationRoversControl bounded context.
   """
 
-  alias NasaExplorationRoversControl.ExplorationRover
+  alias NASAExplorationRoversControl.ExplorationRover
 
   def perform(%ExplorationRover{position: current_position, direction: current_direction} = exploration_rover) do
     {x, y} = current_position

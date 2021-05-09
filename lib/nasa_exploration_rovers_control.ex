@@ -1,10 +1,10 @@
-defmodule NasaExplorationRoversControl do
+defmodule NASAExplorationRoversControl do
   @moduledoc """
   Bounded context for the NASA Exploration Rovers Control System. This module contains all the system use cases.
   """
 
-  alias NasaExplorationRoversControl.ExplorationRover
-  alias NasaExplorationRoversControl.Interactors
+  alias NASAExplorationRoversControl.ExplorationRover
+  alias NASAExplorationRoversControl.Interactors
 
   @doc """
   Use the commands instructions from file to interact with the exploration rovers.

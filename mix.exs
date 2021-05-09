@@ -1,4 +1,4 @@
-defmodule NasaExplorationRoversControl.MixProject do
+defmodule NASAExplorationRoversControl.MixProject do
   use Mix.Project
 
   def project do

@@ -1,16 +1,16 @@
-defmodule NasaExplorationRoversControlTerminalInterface do
+defmodule NASAExplorationRoversControlTerminalInterface do
   @moduledoc """
   This module is a bridge between the user and the application business logic (aka. Delivery Mechanism).
 
   User is able to interact with the business logic using a terminal interface.
   """
 
-  import NasaExplorationRoversControlTerminalInterface.IO
+  import NASAExplorationRoversControlTerminalInterface.IO
 
-  alias NasaExplorationRoversControlTerminalInterface.CelestialBodiesMenu
-  alias NasaExplorationRoversControlTerminalInterface.CommandsExecutor
-  alias NasaExplorationRoversControlTerminalInterface.CommandsInputFilesMenu
-  alias NasaExplorationRoversControlTerminalInterface.FinalStep
+  alias NASAExplorationRoversControlTerminalInterface.CelestialBodiesMenu
+  alias NASAExplorationRoversControlTerminalInterface.CommandsExecutor
+  alias NASAExplorationRoversControlTerminalInterface.CommandsInputFilesMenu
+  alias NASAExplorationRoversControlTerminalInterface.FinalStep
 
   @nasa_banner "   '##::: ##::::'###:::::'######:::::'###::::
     ###:: ##:::'## ##:::'##... ##:::'## ##:::

@@ -1,14 +1,14 @@
-defmodule NasaExplorationRoversControlTerminalInterface.CelestialBodiesMenuTest do
+defmodule NASAExplorationRoversControlTerminalInterface.CelestialBodiesMenuTest do
   use ExUnit.Case
 
   import Mock
 
-  alias NasaExplorationRoversControlTerminalInterface.CelestialBodiesMenu
+  alias NASAExplorationRoversControlTerminalInterface.CelestialBodiesMenu
 
   describe "show_menu_and_wait_for_user_interaction/1" do
     test "shows menu to user and persist state after user has chosen Mars" do
       with_mock(
-        NasaExplorationRoversControlTerminalInterface.IO,
+        NASAExplorationRoversControlTerminalInterface.IO,
         [
           typing_effect_print: fn(message) -> message end,
           print_message: fn(message) -> message end,
@@ -21,17 +21,17 @@ defmodule NasaExplorationRoversControlTerminalInterface.CelestialBodiesMenuTest 
 
         assert new_state == %{selected_celestial_body: %{code: "mars", id: 1, label: "Mars"}}
 
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.clear_screen()
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.clear_screen()
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "The system covered celestial bodies for now are:"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "1) Mars"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "When you are ready, choose an option from the above list."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
           "Which celestial body do you want to explore today?"
         )
       end
@@ -40,7 +40,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.CelestialBodiesMenuTest 
     test "shows menu to user and retries after user has chosen an invalid option" do
       with_mocks([
         {
-          NasaExplorationRoversControlTerminalInterface.IO,
+          NASAExplorationRoversControlTerminalInterface.IO,
           [],
           [
             typing_effect_print: fn(message) -> message end,
@@ -63,23 +63,23 @@ defmodule NasaExplorationRoversControlTerminalInterface.CelestialBodiesMenuTest 
 
         assert new_state == %{}
 
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.clear_screen()
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.clear_screen()
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "The system covered celestial bodies for now are:"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "1) Mars"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "When you are ready, choose an option from the above list."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
           "Which celestial body do you want to explore today?"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Sorry, we do not have this option yet. Maybe in the future."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.wait_for_user_reading()
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.wait_for_user_reading()
         assert_called CelestialBodiesMenu.retry(%{})
       end
     end
@@ -87,7 +87,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.CelestialBodiesMenuTest 
     test "shows menu to user and retries after user has chosen an invalid string option" do
       with_mocks([
         {
-          NasaExplorationRoversControlTerminalInterface.IO,
+          NASAExplorationRoversControlTerminalInterface.IO,
           [],
           [
             typing_effect_print: fn(message) -> message end,
@@ -110,23 +110,23 @@ defmodule NasaExplorationRoversControlTerminalInterface.CelestialBodiesMenuTest 
 
         assert new_state == %{}
 
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.clear_screen()
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.clear_screen()
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "The system covered celestial bodies for now are:"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "1) Mars"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "When you are ready, choose an option from the above list."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
           "Which celestial body do you want to explore today?"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Sorry, we do not have this option yet. Maybe in the future."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.wait_for_user_reading()
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.wait_for_user_reading()
         assert_called CelestialBodiesMenu.retry(%{})
       end
     end
@@ -135,7 +135,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.CelestialBodiesMenuTest 
   describe "retry/1" do
     test "shows menu to user and persist state after user has chosen Mars" do
       with_mock(
-        NasaExplorationRoversControlTerminalInterface.IO,
+        NASAExplorationRoversControlTerminalInterface.IO,
         [
           typing_effect_print: fn(message) -> message end,
           print_message: fn(message) -> message end,

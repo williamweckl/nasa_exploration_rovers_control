@@ -1,13 +1,13 @@
-defmodule NasaExplorationRoversControlTerminalInterface.FinalStepTest do
+defmodule NASAExplorationRoversControlTerminalInterface.FinalStepTest do
   use ExUnit.Case
 
   import Mock
 
-  alias NasaExplorationRoversControlTerminalInterface.FinalStep
+  alias NASAExplorationRoversControlTerminalInterface.FinalStep
 
   @terminal_interface_settings Application.get_env(
     :nasa_exploration_rovers_control,
-    NasaExplorationRoversControlTerminalInterface
+    NASAExplorationRoversControlTerminalInterface
   )
   @file_module @terminal_interface_settings |> Keyword.fetch!(:file_module)
   @system_module @terminal_interface_settings |> Keyword.fetch!(:system_module)
@@ -24,7 +24,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.FinalStepTest do
     test "saves file content to disk when user confirms" do
       with_mocks([
         {
-          NasaExplorationRoversControlTerminalInterface.IO,
+          NASAExplorationRoversControlTerminalInterface.IO,
           [],
           [
             typing_effect_print: fn(message) -> message end,
@@ -68,19 +68,19 @@ defmodule NasaExplorationRoversControlTerminalInterface.FinalStepTest do
 
         assert new_state == :halted
 
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "So. That's it! We had a great time, what do you think?"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "What do you want to do now? Go out for a drink?"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Just kidding. We have not finished yet."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
           "Do you want me to save the output to a file? (Y/n)"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Now I think we have finished. " <>
           "Thank you Xerpa for the opportunity to make me feel challenged again. See you soon. :)"
         )
@@ -90,7 +90,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.FinalStepTest do
     test "does not save file content to disk when user does not confirm" do
       with_mocks([
         {
-          NasaExplorationRoversControlTerminalInterface.IO,
+          NASAExplorationRoversControlTerminalInterface.IO,
           [],
           [
             typing_effect_print: fn(message) -> message end,
@@ -124,19 +124,19 @@ defmodule NasaExplorationRoversControlTerminalInterface.FinalStepTest do
 
         assert new_state == :halted
 
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "So. That's it! We had a great time, what do you think?"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "What do you want to do now? Go out for a drink?"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Just kidding. We have not finished yet."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
           "Do you want me to save the output to a file? (Y/n)"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "OK then. Thank you Xerpa for the opportunity to make me feel challenged again. See you soon. :)"
         )
 

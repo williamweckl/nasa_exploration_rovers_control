@@ -1,6 +1,6 @@
-defmodule NasaExplorationRoversControl.ExplorationRoverNasaExplorationRoversControl.ExplorationRoverTest do
+defmodule NASAExplorationRoversControl.ExplorationRoverNASAExplorationRoversControl.ExplorationRoverTest do
   use ExUnit.Case
-  alias NasaExplorationRoversControl.ExplorationRover
+  alias NASAExplorationRoversControl.ExplorationRover
 
   doctest ExplorationRover
 

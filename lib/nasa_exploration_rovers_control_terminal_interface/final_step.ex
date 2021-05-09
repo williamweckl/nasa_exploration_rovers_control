@@ -1,13 +1,13 @@
-defmodule NasaExplorationRoversControlTerminalInterface.FinalStep do
+defmodule NASAExplorationRoversControlTerminalInterface.FinalStep do
   @moduledoc """
   This module contains for the final step at the interaction with the terminal interface.
   """
 
-  import NasaExplorationRoversControlTerminalInterface.IO
+  import NASAExplorationRoversControlTerminalInterface.IO
 
   @terminal_interface_settings Application.get_env(
     :nasa_exploration_rovers_control,
-    NasaExplorationRoversControlTerminalInterface
+    NASAExplorationRoversControlTerminalInterface
   )
   @file_module @terminal_interface_settings |> Keyword.fetch!(:file_module)
   @system_module @terminal_interface_settings |> Keyword.fetch!(:system_module)

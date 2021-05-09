@@ -1,11 +1,11 @@
-defmodule NasaExplorationRoversControlTerminalInterface.IOTest do
+defmodule NASAExplorationRoversControlTerminalInterface.IOTest do
   use ExUnit.Case
 
   import Mock
 
   @terminal_interface_settings Application.get_env(
     :nasa_exploration_rovers_control,
-    NasaExplorationRoversControlTerminalInterface
+    NASAExplorationRoversControlTerminalInterface
   )
   @io_module @terminal_interface_settings |> Keyword.fetch!(:io_module)
   @timer_module @terminal_interface_settings |> Keyword.fetch!(:timer_module)
@@ -35,7 +35,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.IOTest do
           ]
         }
       ]) do
-        NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print("My message")
+        NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print("My message")
 
         assert_called @io_module.write("M")
         assert_called @io_module.write("y")
@@ -59,7 +59,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.IOTest do
           cmd: fn("clear", [], _opts) -> :ok end
         ]
       ) do
-        assert NasaExplorationRoversControlTerminalInterface.IO.clear_screen() == :ok
+        assert NASAExplorationRoversControlTerminalInterface.IO.clear_screen() == :ok
 
         assert_called @system_module.cmd("clear", [], into: :_)
       end
@@ -74,7 +74,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.IOTest do
           puts: fn(message) -> message end
         ]
       ) do
-        assert NasaExplorationRoversControlTerminalInterface.IO.print_message("my msg") == "my msg"
+        assert NASAExplorationRoversControlTerminalInterface.IO.print_message("my msg") == "my msg"
 
         assert_called @io_module.puts("my msg")
       end
@@ -89,7 +89,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.IOTest do
           write: fn(message) -> message end
         ]
       ) do
-        assert NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "my msg", without_line_break: true
         ) == "my msg"
 
@@ -106,7 +106,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.IOTest do
           write: fn("\n") -> "\n" end
         ]
       ) do
-        assert NasaExplorationRoversControlTerminalInterface.IO.break_line() == "\n"
+        assert NASAExplorationRoversControlTerminalInterface.IO.break_line() == "\n"
 
         assert_called @io_module.write("\n")
       end
@@ -122,7 +122,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.IOTest do
           read: fn(:stdio, :line) -> "user's choice" end,
         ]
       ) do
-        assert NasaExplorationRoversControlTerminalInterface.IO.prompt_user_choice("What do you want to do?") ==
+        assert NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice("What do you want to do?") ==
           "user's choice"
 
         assert_called @io_module.write("What do you want to do?: ")
@@ -139,7 +139,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.IOTest do
           sleep: fn(sleep_time) -> sleep_time end,
         ]
       ) do
-        assert NasaExplorationRoversControlTerminalInterface.IO.wait_for_user_reading() == @user_reading_time
+        assert NASAExplorationRoversControlTerminalInterface.IO.wait_for_user_reading() == @user_reading_time
 
         assert_called @timer_module.sleep(@user_reading_time)
       end
@@ -154,7 +154,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.IOTest do
           sleep: fn(sleep_time) -> sleep_time end,
         ]
       ) do
-        assert NasaExplorationRoversControlTerminalInterface.IO.wait_for_user_reading(1000) == 1000
+        assert NASAExplorationRoversControlTerminalInterface.IO.wait_for_user_reading(1000) == 1000
 
         assert_called @timer_module.sleep(1000)
       end

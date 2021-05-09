@@ -2,7 +2,7 @@
 # and its dependencies with the aid of the Mix.Config module.
 use Mix.Config
 
-config :nasa_exploration_rovers_control, NasaExplorationRoversControlTerminalInterface,
+config :nasa_exploration_rovers_control, NASAExplorationRoversControlTerminalInterface,
   typing_effect_print_time: 30,
   user_reading_time: 2000,
   io_module: IO,

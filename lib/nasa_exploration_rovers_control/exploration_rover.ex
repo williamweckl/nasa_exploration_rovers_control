@@ -1,4 +1,4 @@
-defmodule NasaExplorationRoversControl.ExplorationRover do
+defmodule NASAExplorationRoversControl.ExplorationRover do
   @moduledoc """
   Exploration Rover entity, it represents a real exploration rover that is exploring another planet.
 
@@ -9,20 +9,20 @@ defmodule NasaExplorationRoversControl.ExplorationRover do
 
   ## Examples
 
-      iex> %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
-      %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
+      iex> %NASAExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
+      %NASAExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
 
-      iex> %NasaExplorationRoversControl.ExplorationRover{position: {3,2}, direction: "S"}
-      %NasaExplorationRoversControl.ExplorationRover{position: {3,2}, direction: "S"}
+      iex> %NASAExplorationRoversControl.ExplorationRover{position: {3,2}, direction: "S"}
+      %NASAExplorationRoversControl.ExplorationRover{position: {3,2}, direction: "S"}
 
-      iex> %NasaExplorationRoversControl.ExplorationRover{position: {6,6}, direction: "W"}
-      %NasaExplorationRoversControl.ExplorationRover{position: {6,6}, direction: "W"}
+      iex> %NASAExplorationRoversControl.ExplorationRover{position: {6,6}, direction: "W"}
+      %NASAExplorationRoversControl.ExplorationRover{position: {6,6}, direction: "W"}
 
-      iex> %NasaExplorationRoversControl.ExplorationRover{position: {3,0}, direction: "E"}
-      %NasaExplorationRoversControl.ExplorationRover{position: {3,0}, direction: "E"}
+      iex> %NASAExplorationRoversControl.ExplorationRover{position: {3,0}, direction: "E"}
+      %NASAExplorationRoversControl.ExplorationRover{position: {3,0}, direction: "E"}
   """
 
-  alias NasaExplorationRoversControl.ExplorationRover
+  alias NASAExplorationRoversControl.ExplorationRover
 
   @enforce_keys [:position, :direction]
   defstruct position: {0, 0}, direction: "N", commands: []
@@ -39,49 +39,49 @@ defmodule NasaExplorationRoversControl.ExplorationRover do
 
   ## Examples
 
-      iex> NasaExplorationRoversControl.ExplorationRover.new(position: {10,3}, direction: "W")
-      {:ok, %NasaExplorationRoversControl.ExplorationRover{position: {10,3}, direction: "W"}}
+      iex> NASAExplorationRoversControl.ExplorationRover.new(position: {10,3}, direction: "W")
+      {:ok, %NASAExplorationRoversControl.ExplorationRover{position: {10,3}, direction: "W"}}
 
-      iex> NasaExplorationRoversControl.ExplorationRover.new(position: {3,5}, direction: "S")
-      {:ok, %NasaExplorationRoversControl.ExplorationRover{position: {3,5}, direction: "S"}}
+      iex> NASAExplorationRoversControl.ExplorationRover.new(position: {3,5}, direction: "S")
+      {:ok, %NASAExplorationRoversControl.ExplorationRover{position: {3,5}, direction: "S"}}
 
-      iex> NasaExplorationRoversControl.ExplorationRover.new(position: {-1,0}, direction: "E")
+      iex> NASAExplorationRoversControl.ExplorationRover.new(position: {-1,0}, direction: "E")
       {:error, "Invalid position. Coordinates must not be negative."}
 
-      iex> NasaExplorationRoversControl.ExplorationRover.new(position: {0,-1}, direction: "E")
+      iex> NASAExplorationRoversControl.ExplorationRover.new(position: {0,-1}, direction: "E")
       {:error, "Invalid position. Coordinates must not be negative."}
 
-      iex> NasaExplorationRoversControl.ExplorationRover.new(position: "string", direction: "E")
+      iex> NASAExplorationRoversControl.ExplorationRover.new(position: "string", direction: "E")
       {:error, "Invalid position. Must be a tuple."}
 
-      iex> NasaExplorationRoversControl.ExplorationRover.new(position: 123, direction: "N")
+      iex> NASAExplorationRoversControl.ExplorationRover.new(position: 123, direction: "N")
       {:error, "Invalid position. Must be a tuple."}
 
-      iex> NasaExplorationRoversControl.ExplorationRover.new(position: [], direction: "N")
+      iex> NASAExplorationRoversControl.ExplorationRover.new(position: [], direction: "N")
       {:error, "Invalid position. Must be a tuple."}
 
-      iex> NasaExplorationRoversControl.ExplorationRover.new(position: %{}, direction: "N")
+      iex> NASAExplorationRoversControl.ExplorationRover.new(position: %{}, direction: "N")
       {:error, "Invalid position. Must be a tuple."}
 
-      iex> NasaExplorationRoversControl.ExplorationRover.new(position: {0,0}, direction: "invalid")
+      iex> NASAExplorationRoversControl.ExplorationRover.new(position: {0,0}, direction: "invalid")
       {:error, "Invalid direction. Must be N,S,W or E."}
 
-      iex> NasaExplorationRoversControl.ExplorationRover.new(position: {0,0}, direction: "I")
+      iex> NASAExplorationRoversControl.ExplorationRover.new(position: {0,0}, direction: "I")
       {:error, "Invalid direction. Must be N,S,W or E."}
 
-      iex> NasaExplorationRoversControl.ExplorationRover.new(position: {0,0}, direction: "P")
+      iex> NASAExplorationRoversControl.ExplorationRover.new(position: {0,0}, direction: "P")
       {:error, "Invalid direction. Must be N,S,W or E."}
 
-      iex> NasaExplorationRoversControl.ExplorationRover.new(position: {0,0}, direction: 123)
+      iex> NASAExplorationRoversControl.ExplorationRover.new(position: {0,0}, direction: 123)
       {:error, "Invalid direction. Must be N,S,W or E."}
 
-      iex> NasaExplorationRoversControl.ExplorationRover.new(position: {0,0}, direction: [])
+      iex> NASAExplorationRoversControl.ExplorationRover.new(position: {0,0}, direction: [])
       {:error, "Invalid direction. Must be N,S,W or E."}
 
-      iex> NasaExplorationRoversControl.ExplorationRover.new(position: {0,0}, direction: {})
+      iex> NASAExplorationRoversControl.ExplorationRover.new(position: {0,0}, direction: {})
       {:error, "Invalid direction. Must be N,S,W or E."}
 
-      iex> NasaExplorationRoversControl.ExplorationRover.new(position: {0,0}, direction: %{})
+      iex> NASAExplorationRoversControl.ExplorationRover.new(position: {0,0}, direction: %{})
       {:error, "Invalid direction. Must be N,S,W or E."}
 
   """
@@ -114,28 +114,28 @@ defmodule NasaExplorationRoversControl.ExplorationRover do
 
   ## Examples
 
-      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
-      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.give_commands(["L"])
-      {:ok, %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N", commands: ["L"]}}
+      iex> exploration_rover = %NASAExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
+      ...> exploration_rover |> NASAExplorationRoversControl.ExplorationRover.give_commands(["L"])
+      {:ok, %NASAExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N", commands: ["L"]}}
 
-      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
-      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.give_commands(["L", "L", "R"])
-      {:ok, %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N", commands: ["L", "L", "R"]}}
+      iex> exploration_rover = %NASAExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
+      ...> exploration_rover |> NASAExplorationRoversControl.ExplorationRover.give_commands(["L", "L", "R"])
+      {:ok, %NASAExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N", commands: ["L", "L", "R"]}}
 
-      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
-      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.give_commands([])
+      iex> exploration_rover = %NASAExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
+      ...> exploration_rover |> NASAExplorationRoversControl.ExplorationRover.give_commands([])
       {:error, "Commands list must not be empty."}
 
-      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
-      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.give_commands("string")
+      iex> exploration_rover = %NASAExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
+      ...> exploration_rover |> NASAExplorationRoversControl.ExplorationRover.give_commands("string")
       {:error, "Commands must be a list."}
 
-      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
-      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.give_commands(["I"])
+      iex> exploration_rover = %NASAExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
+      ...> exploration_rover |> NASAExplorationRoversControl.ExplorationRover.give_commands(["I"])
       {:error, "Command `I` is invalid. Must be L, R or M."}
 
-      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
-      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.give_commands(["L","M","P"])
+      iex> exploration_rover = %NASAExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
+      ...> exploration_rover |> NASAExplorationRoversControl.ExplorationRover.give_commands(["L","M","P"])
       {:error, "Command `P` is invalid. Must be L, R or M."}
   """
   def give_commands(exploration_rover, commands) do
@@ -148,13 +148,13 @@ defmodule NasaExplorationRoversControl.ExplorationRover do
 
   ## Examples
 
-      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N", commands: ["L"]}
-      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.clear_commands()
-      {:ok, %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N", commands: []}}
+      iex> exploration_rover = %NASAExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N", commands: ["L"]}
+      ...> exploration_rover |> NASAExplorationRoversControl.ExplorationRover.clear_commands()
+      {:ok, %NASAExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N", commands: []}}
 
-      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N", commands: ["L","M","R"]}
-      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.clear_commands()
-      {:ok, %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N", commands: []}}
+      iex> exploration_rover = %NASAExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N", commands: ["L","M","R"]}
+      ...> exploration_rover |> NASAExplorationRoversControl.ExplorationRover.clear_commands()
+      {:ok, %NASAExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N", commands: []}}
   """
   def clear_commands(exploration_rover) do
     {:ok, %ExplorationRover{exploration_rover | commands: []}}
@@ -189,16 +189,16 @@ defmodule NasaExplorationRoversControl.ExplorationRover do
 
   ## Examples
 
-      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
-      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.change_direction("W")
-      {:ok, %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "W"}}
+      iex> exploration_rover = %NASAExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
+      ...> exploration_rover |> NASAExplorationRoversControl.ExplorationRover.change_direction("W")
+      {:ok, %NASAExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "W"}}
 
-      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "S"}
-      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.change_direction("E")
-      {:ok, %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "E"}}
+      iex> exploration_rover = %NASAExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "S"}
+      ...> exploration_rover |> NASAExplorationRoversControl.ExplorationRover.change_direction("E")
+      {:ok, %NASAExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "E"}}
 
-      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "S"}
-      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.change_direction("I")
+      iex> exploration_rover = %NASAExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "S"}
+      ...> exploration_rover |> NASAExplorationRoversControl.ExplorationRover.change_direction("I")
       {:error, "Invalid direction. Must be N,S,W or E."}
 
   """
@@ -212,20 +212,20 @@ defmodule NasaExplorationRoversControl.ExplorationRover do
 
   ## Examples
 
-      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
-      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.change_position({3,3})
-      {:ok, %NasaExplorationRoversControl.ExplorationRover{position: {3,3}, direction: "N"}}
+      iex> exploration_rover = %NASAExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "N"}
+      ...> exploration_rover |> NASAExplorationRoversControl.ExplorationRover.change_position({3,3})
+      {:ok, %NASAExplorationRoversControl.ExplorationRover{position: {3,3}, direction: "N"}}
 
-      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "S"}
-      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.change_position({1,4})
-      {:ok, %NasaExplorationRoversControl.ExplorationRover{position: {1,4}, direction: "S"}}
+      iex> exploration_rover = %NASAExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "S"}
+      ...> exploration_rover |> NASAExplorationRoversControl.ExplorationRover.change_position({1,4})
+      {:ok, %NASAExplorationRoversControl.ExplorationRover{position: {1,4}, direction: "S"}}
 
-      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "S"}
-      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.change_position({-1,4})
+      iex> exploration_rover = %NASAExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "S"}
+      ...> exploration_rover |> NASAExplorationRoversControl.ExplorationRover.change_position({-1,4})
       {:error, "Invalid position. Coordinates must not be negative."}
 
-      iex> exploration_rover = %NasaExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "S"}
-      ...> exploration_rover |> NasaExplorationRoversControl.ExplorationRover.change_position(123)
+      iex> exploration_rover = %NASAExplorationRoversControl.ExplorationRover{position: {0,0}, direction: "S"}
+      ...> exploration_rover |> NASAExplorationRoversControl.ExplorationRover.change_position(123)
       {:error, "Invalid position. Must be a tuple."}
 
   """

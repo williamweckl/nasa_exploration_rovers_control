@@ -1,6 +1,6 @@
-defmodule NasaExplorationRoversControl.CelestialBodies.FactoryTest do
+defmodule NASAExplorationRoversControl.CelestialBodies.FactoryTest do
   use ExUnit.Case
 
-  doctest NasaExplorationRoversControl.CelestialBodies.Factory, import: true
+  doctest NASAExplorationRoversControl.CelestialBodies.Factory, import: true
 
 end

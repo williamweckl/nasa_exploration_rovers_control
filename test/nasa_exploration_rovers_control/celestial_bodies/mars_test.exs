@@ -1,6 +1,6 @@
-defmodule NasaExplorationRoversControl.CelestialBodies.MarsTest do
+defmodule NASAExplorationRoversControl.CelestialBodies.MarsTest do
   use ExUnit.Case
 
-  doctest NasaExplorationRoversControl.CelestialBodies.Mars, import: true
+  doctest NASAExplorationRoversControl.CelestialBodies.Mars, import: true
 
 end

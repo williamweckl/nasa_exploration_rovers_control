@@ -1,9 +1,9 @@
-defmodule NasaExplorationRoversControlTerminalInterface.CelestialBodiesMenu do
+defmodule NASAExplorationRoversControlTerminalInterface.CelestialBodiesMenu do
   @moduledoc """
   This module contains logic to show terminal interface celestial bodies menu to user and to handle user interactions.
   """
 
-  import NasaExplorationRoversControlTerminalInterface.IO
+  import NASAExplorationRoversControlTerminalInterface.IO
 
   @celestial_bodies_allowed [
     %{

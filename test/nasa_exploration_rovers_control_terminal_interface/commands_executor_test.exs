@@ -1,13 +1,13 @@
-defmodule NasaExplorationRoversControlTerminalInterface.CommandsExecutorTest do
+defmodule NASAExplorationRoversControlTerminalInterface.CommandsExecutorTest do
   use ExUnit.Case
 
   import Mock
 
-  alias NasaExplorationRoversControlTerminalInterface.CommandsExecutor
+  alias NASAExplorationRoversControlTerminalInterface.CommandsExecutor
 
   @terminal_interface_settings Application.get_env(
     :nasa_exploration_rovers_control,
-    NasaExplorationRoversControlTerminalInterface
+    NASAExplorationRoversControlTerminalInterface
   )
   @system_module @terminal_interface_settings |> Keyword.fetch!(:system_module)
 
@@ -23,7 +23,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.CommandsExecutorTest do
         "priv/commands_input_files/mars/exploration_attempt_2_by_zena_cardman_2030_05_09"
 
       with_mock(
-        NasaExplorationRoversControlTerminalInterface.IO,
+        NASAExplorationRoversControlTerminalInterface.IO,
         [
           typing_effect_print: fn(message) -> message end,
           print_message: fn(message) -> message end,
@@ -48,45 +48,45 @@ defmodule NasaExplorationRoversControlTerminalInterface.CommandsExecutorTest do
           execution_output: execution_output
         }
 
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.clear_screen()
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.clear_screen()
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Good to know!"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "We will initialize the exploration to Mars now following the " <>
           "instructions presented at the file `#{selected_commands_input_file_path}`."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Take a look at the instructions again. Your commands will take about " <>
           "8 minutes to be delivered to the Exploration Rovers."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Before the execution, the system will try to prevent some common mistakes like " <>
           "Exploration Rovers getting out from the exploration ground, but it doesn't hurt to take another look."
         )
-        assert_called_exactly NasaExplorationRoversControlTerminalInterface.IO.wait_for_user_reading(), 2
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called_exactly NASAExplorationRoversControlTerminalInterface.IO.wait_for_user_reading(), 2
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "These are the commands we will deliver to the Exploration Rovers:"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           File.read!(selected_commands_input_file_path)
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
           "Do you want to continue? (Y/n)"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "The operation has been performed successfuly! See the output below:"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           execution_output
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "The output above shows where the rovers will be after the movement."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "But don't forget that the exploration rovers will start to move only when the commands arrive to them."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.wait_for_user_reading(5000)
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.wait_for_user_reading(5000)
       end
     end
 
@@ -95,7 +95,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.CommandsExecutorTest do
         "priv/commands_input_files/mars/exploration_attempt_3_by_raja_chari_2030_05_11"
 
       with_mock(
-        NasaExplorationRoversControlTerminalInterface.IO,
+        NASAExplorationRoversControlTerminalInterface.IO,
         [
           typing_effect_print: fn(message) -> message end,
           print_message: fn(message) -> message end,
@@ -126,45 +126,45 @@ defmodule NasaExplorationRoversControlTerminalInterface.CommandsExecutorTest do
           execution_output: execution_output
         }
 
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.clear_screen()
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.clear_screen()
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Good to know!"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "We will initialize the exploration to Mars now following the " <>
           "instructions presented at the file `#{selected_commands_input_file_path}`."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Take a look at the instructions again. Your commands will take about " <>
           "8 minutes to be delivered to the Exploration Rovers."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Before the execution, the system will try to prevent some common mistakes like " <>
           "Exploration Rovers getting out from the exploration ground, but it doesn't hurt to take another look."
         )
-        assert_called_exactly NasaExplorationRoversControlTerminalInterface.IO.wait_for_user_reading(), 2
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called_exactly NASAExplorationRoversControlTerminalInterface.IO.wait_for_user_reading(), 2
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "These are the commands we will deliver to the Exploration Rovers:"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           File.read!(selected_commands_input_file_path)
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
           "Do you want to continue? (Y/n)"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "The operation has been performed successfuly! See the output below:"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           execution_output
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "The output above shows where the rovers will be after the movement."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "But don't forget that the exploration rovers will start to move only when the commands arrive to them."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.wait_for_user_reading(5000)
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.wait_for_user_reading(5000)
       end
     end
 
@@ -174,7 +174,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.CommandsExecutorTest do
 
       with_mocks([
         {
-          NasaExplorationRoversControlTerminalInterface.IO,
+          NASAExplorationRoversControlTerminalInterface.IO,
           [],
           [
             typing_effect_print: fn(message) -> message end,
@@ -201,36 +201,36 @@ defmodule NasaExplorationRoversControlTerminalInterface.CommandsExecutorTest do
 
         assert new_state == :halted
 
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.clear_screen()
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.clear_screen()
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Good to know!"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "We will initialize the exploration to Mars now following the " <>
           "instructions presented at the file `#{selected_commands_input_file_path}`."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Take a look at the instructions again. Your commands will take about " <>
           "8 minutes to be delivered to the Exploration Rovers."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Before the execution, the system will try to prevent some common mistakes like " <>
           "Exploration Rovers getting out from the exploration ground, but it doesn't hurt to take another look."
         )
-        assert_called_exactly NasaExplorationRoversControlTerminalInterface.IO.wait_for_user_reading(), 2
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called_exactly NASAExplorationRoversControlTerminalInterface.IO.wait_for_user_reading(), 2
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "These are the commands we will deliver to the Exploration Rovers:"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           File.read!(selected_commands_input_file_path)
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
           "Do you want to continue? (Y/n)"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "The operation has been performed with errors."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "The terrain of mars is rectangular and the value entered is a square. Please check your commands."
         )
       end
@@ -241,7 +241,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.CommandsExecutorTest do
 
       with_mocks([
         {
-          NasaExplorationRoversControlTerminalInterface.IO,
+          NASAExplorationRoversControlTerminalInterface.IO,
           [],
           [
             typing_effect_print: fn(message) -> message end,
@@ -267,27 +267,27 @@ defmodule NasaExplorationRoversControlTerminalInterface.CommandsExecutorTest do
 
         assert new_state == :halted
 
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.clear_screen()
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.clear_screen()
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Good to know!"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "We will initialize the exploration to Mars now following the " <>
           "instructions presented at the file `#{selected_commands_input_file_path}`."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Take a look at the instructions again. Your commands will take about " <>
           "8 minutes to be delivered to the Exploration Rovers."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Before the execution, the system will try to prevent some common mistakes like " <>
           "Exploration Rovers getting out from the exploration ground, but it doesn't hurt to take another look."
         )
-        assert_called_exactly NasaExplorationRoversControlTerminalInterface.IO.wait_for_user_reading(), 2
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called_exactly NASAExplorationRoversControlTerminalInterface.IO.wait_for_user_reading(), 2
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "These are the commands we will deliver to the Exploration Rovers:"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "Oops. Looks like the informed file does not exist. " <>
           "I'll be gone for now but you can call me again anytime you want."
         )
@@ -300,7 +300,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.CommandsExecutorTest do
 
       with_mocks([
         {
-          NasaExplorationRoversControlTerminalInterface.IO,
+          NASAExplorationRoversControlTerminalInterface.IO,
           [],
           [
             typing_effect_print: fn(message) -> message end,
@@ -327,33 +327,33 @@ defmodule NasaExplorationRoversControlTerminalInterface.CommandsExecutorTest do
 
         assert new_state == :halted
 
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.clear_screen()
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.clear_screen()
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Good to know!"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "We will initialize the exploration to Mars now following the " <>
           "instructions presented at the file `#{selected_commands_input_file_path}`."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Take a look at the instructions again. Your commands will take about " <>
           "8 minutes to be delivered to the Exploration Rovers."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Before the execution, the system will try to prevent some common mistakes like " <>
           "Exploration Rovers getting out from the exploration ground, but it doesn't hurt to take another look."
         )
-        assert_called_exactly NasaExplorationRoversControlTerminalInterface.IO.wait_for_user_reading(), 2
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called_exactly NASAExplorationRoversControlTerminalInterface.IO.wait_for_user_reading(), 2
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "These are the commands we will deliver to the Exploration Rovers:"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           File.read!(selected_commands_input_file_path)
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
           "Do you want to continue? (Y/n)"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.print_message(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "OK then, I'll be here to help in another time."
         )
       end

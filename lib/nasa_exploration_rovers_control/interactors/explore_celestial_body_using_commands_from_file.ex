@@ -1,12 +1,12 @@
-defmodule NasaExplorationRoversControl.Interactors.ExploreCelestialBodyUsingCommandsFromFile do
+defmodule NASAExplorationRoversControl.Interactors.ExploreCelestialBodyUsingCommandsFromFile do
   @moduledoc """
   Use case responsible for use the commands instructions from file to interact with the exploration rovers to explore a Celestial Body.
 
-  Do not call this module directly, use always the NasaExplorationRoversControl bounded context.
+  Do not call this module directly, use always the NASAExplorationRoversControl bounded context.
   """
 
-  alias NasaExplorationRoversControl.CelestialBodies
-  alias NasaExplorationRoversControl.ExplorationRover
+  alias NASAExplorationRoversControl.CelestialBodies
+  alias NASAExplorationRoversControl.ExplorationRover
 
   def perform(celestial_body_name, input_file) do
     celestial_body_name
@@ -17,7 +17,7 @@ defmodule NasaExplorationRoversControl.Interactors.ExploreCelestialBodyUsingComm
   def do_perform({:error, _error_message} = error_result, _input_file), do: error_result
   def do_perform({:ok, celestial_body_module}, input_file) do
     input_file
-    |> NasaExplorationRoversControl.interpret_exploration_commands_input_file()
+    |> NASAExplorationRoversControl.interpret_exploration_commands_input_file()
     |> celestial_body_module.validate()
     |> explore()
   end
@@ -26,7 +26,7 @@ defmodule NasaExplorationRoversControl.Interactors.ExploreCelestialBodyUsingComm
     exploration_rovers = exploration_rovers
     |> Enum.map(fn exploration_rover ->
       result = exploration_rover
-      |> NasaExplorationRoversControl.execute_exploration_rover_commands()
+      |> NASAExplorationRoversControl.execute_exploration_rover_commands()
       |> prevent_exploration_rover_to_leave_the_ground(ground_size)
 
       case result do

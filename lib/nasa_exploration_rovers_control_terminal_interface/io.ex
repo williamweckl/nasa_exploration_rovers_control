@@ -1,11 +1,11 @@
-defmodule NasaExplorationRoversControlTerminalInterface.IO do
+defmodule NASAExplorationRoversControlTerminalInterface.IO do
   @moduledoc """
   This module contains helpers for interacting with the user's terminal.
   """
 
   @terminal_interface_settings Application.get_env(
     :nasa_exploration_rovers_control,
-    NasaExplorationRoversControlTerminalInterface
+    NASAExplorationRoversControlTerminalInterface
   )
   @io_module @terminal_interface_settings |> Keyword.fetch!(:io_module)
   @timer_module @terminal_interface_settings |> Keyword.fetch!(:timer_module)

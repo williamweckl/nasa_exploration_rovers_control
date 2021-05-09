@@ -1,15 +1,15 @@
-defmodule NasaExplorationRoversControlTerminalInterface.CommandsExecutor do
+defmodule NASAExplorationRoversControlTerminalInterface.CommandsExecutor do
   @moduledoc """
   This module contains logic to execute commands from selected file by user.
   """
 
-  import NasaExplorationRoversControlTerminalInterface.IO
+  import NASAExplorationRoversControlTerminalInterface.IO
 
-  alias NasaExplorationRoversControl.CelestialBodies
+  alias NASAExplorationRoversControl.CelestialBodies
 
   @terminal_interface_settings Application.get_env(
     :nasa_exploration_rovers_control,
-    NasaExplorationRoversControlTerminalInterface
+    NASAExplorationRoversControlTerminalInterface
   )
   @system_module @terminal_interface_settings |> Keyword.fetch!(:system_module)
 
@@ -91,7 +91,7 @@ defmodule NasaExplorationRoversControlTerminalInterface.CommandsExecutor do
       selected_commands_input_file_path: selected_commands_input_file_path
     } = state
   ) do
-    result = NasaExplorationRoversControl.explore_celestial_body_using_commands_from_file(
+    result = NASAExplorationRoversControl.explore_celestial_body_using_commands_from_file(
       selected_celestial_body.code, selected_commands_input_file_path
     )
 

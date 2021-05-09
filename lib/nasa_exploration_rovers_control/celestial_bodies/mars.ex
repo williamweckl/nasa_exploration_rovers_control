@@ -1,4 +1,4 @@
-defmodule NasaExplorationRoversControl.CelestialBodies.Mars do
+defmodule NASAExplorationRoversControl.CelestialBodies.Mars do
   @moduledoc """
   Module representing Mars Celestial Body.
   """

@@ -1,11 +1,11 @@
-defmodule NasaExplorationRoversControlTerminalInterfaceTest do
+defmodule NASAExplorationRoversControlTerminalInterfaceTest do
   use ExUnit.Case
 
   import Mock
-  alias NasaExplorationRoversControlTerminalInterface.CelestialBodiesMenu
-  alias NasaExplorationRoversControlTerminalInterface.CommandsExecutor
-  alias NasaExplorationRoversControlTerminalInterface.CommandsInputFilesMenu
-  alias NasaExplorationRoversControlTerminalInterface.FinalStep
+  alias NASAExplorationRoversControlTerminalInterface.CelestialBodiesMenu
+  alias NASAExplorationRoversControlTerminalInterface.CommandsExecutor
+  alias NASAExplorationRoversControlTerminalInterface.CommandsInputFilesMenu
+  alias NASAExplorationRoversControlTerminalInterface.FinalStep
 
   @selected_celestial_body %{
     id: 1,
@@ -19,7 +19,7 @@ defmodule NasaExplorationRoversControlTerminalInterfaceTest do
     test "shows initial messages and calls all the steps" do
       with_mocks([
         {
-          NasaExplorationRoversControlTerminalInterface.IO,
+          NASAExplorationRoversControlTerminalInterface.IO,
           [],
           [
             clear_screen: fn -> :ok end,
@@ -79,22 +79,22 @@ defmodule NasaExplorationRoversControlTerminalInterfaceTest do
           ]
         }
       ]) do
-        assert NasaExplorationRoversControlTerminalInterface.start() == :halt
+        assert NASAExplorationRoversControlTerminalInterface.start() == :halt
 
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.clear_screen()
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.clear_screen()
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Hi Explorer! Welcome back!"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "This system was developed to control exploration rovers over celestial bodies."
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "You are about to control you exploration rovers at a celestial body, aren't you excited?"
         )
-        assert_called NasaExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Alright! Let's begin then."
         )
-        assert_called_exactly NasaExplorationRoversControlTerminalInterface.IO.wait_for_user_reading(), 2
+        assert_called_exactly NASAExplorationRoversControlTerminalInterface.IO.wait_for_user_reading(), 2
       end
     end
   end

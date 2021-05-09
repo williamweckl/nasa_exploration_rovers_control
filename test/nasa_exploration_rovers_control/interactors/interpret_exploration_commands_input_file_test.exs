@@ -1,7 +1,7 @@
-defmodule NasaExplorationRoversControl.Interactors.InterpretExplorationCommandsInputFileTest do
+defmodule NASAExplorationRoversControl.Interactors.InterpretExplorationCommandsInputFileTest do
   use ExUnit.Case
 
-  alias NasaExplorationRoversControl.Interactors.InterpretExplorationCommandsInputFile
+  alias NASAExplorationRoversControl.Interactors.InterpretExplorationCommandsInputFile
 
   @commands_input_files_base_path "test/support/commands_input_files"
 
@@ -11,7 +11,7 @@ defmodule NasaExplorationRoversControl.Interactors.InterpretExplorationCommandsI
         "#{@commands_input_files_base_path}/with_2k_exploration_rovers"
       )
 
-      exploration_rover = %NasaExplorationRoversControl.ExplorationRover{
+      exploration_rover = %NASAExplorationRoversControl.ExplorationRover{
         commands: ["L", "M"], direction: "N", position: {1, 2}
       }
 
@@ -34,7 +34,7 @@ defmodule NasaExplorationRoversControl.Interactors.InterpretExplorationCommandsI
         ground_size: {3, 8},
         exploration_rovers: [
           {:error, "Command `I` is invalid. Must be L, R or M."},
-          %NasaExplorationRoversControl.ExplorationRover{commands: ["L", "M", "M"], direction: "N", position: {3, 8}}
+          %NASAExplorationRoversControl.ExplorationRover{commands: ["L", "M", "M"], direction: "N", position: {3, 8}}
         ]
       }}
     end
@@ -47,7 +47,7 @@ defmodule NasaExplorationRoversControl.Interactors.InterpretExplorationCommandsI
       assert result == {:ok, %{
         ground_size: {3, 8},
         exploration_rovers: [
-          %NasaExplorationRoversControl.ExplorationRover{commands: ["M", "M", "M"], direction: "N", position: {0, 0}},
+          %NASAExplorationRoversControl.ExplorationRover{commands: ["M", "M", "M"], direction: "N", position: {0, 0}},
           {:error, "Command `P` is invalid. Must be L, R or M."}
         ]
       }}
@@ -61,7 +61,7 @@ defmodule NasaExplorationRoversControl.Interactors.InterpretExplorationCommandsI
       assert result == {:ok, %{
         ground_size: {3, 8},
         exploration_rovers: [
-          %NasaExplorationRoversControl.ExplorationRover{commands: ["M", "M", "M"], direction: "N", position: {0, 0}},
+          %NASAExplorationRoversControl.ExplorationRover{commands: ["M", "M", "M"], direction: "N", position: {0, 0}},
           {:error, "Commands list must not be empty."}
         ]
       }}
@@ -76,7 +76,7 @@ defmodule NasaExplorationRoversControl.Interactors.InterpretExplorationCommandsI
         ground_size: {3, 8},
         exploration_rovers: [
           {:error, "Commands list must not be empty."},
-          %NasaExplorationRoversControl.ExplorationRover{commands: ["M", "M", "M"], direction: "N", position: {3, 8}},
+          %NASAExplorationRoversControl.ExplorationRover{commands: ["M", "M", "M"], direction: "N", position: {3, 8}},
         ]
       }}
     end
@@ -90,7 +90,7 @@ defmodule NasaExplorationRoversControl.Interactors.InterpretExplorationCommandsI
         ground_size: {3, 5},
         exploration_rovers: [
           {:error, "Command ` ` is invalid. Must be L, R or M."},
-          %NasaExplorationRoversControl.ExplorationRover{commands: ["L", "M"], direction: "W", position: {3, 3}},
+          %NASAExplorationRoversControl.ExplorationRover{commands: ["L", "M"], direction: "W", position: {3, 3}},
         ]
       }}
     end
@@ -119,7 +119,7 @@ defmodule NasaExplorationRoversControl.Interactors.InterpretExplorationCommandsI
         ground_size: {3, 8},
         exploration_rovers: [
           {:error, "Position or direction are invalid."},
-          %NasaExplorationRoversControl.ExplorationRover{
+          %NASAExplorationRoversControl.ExplorationRover{
             commands: ["L", "M", "M", "M"], direction: "N", position: {0, 0}
           },
         ]

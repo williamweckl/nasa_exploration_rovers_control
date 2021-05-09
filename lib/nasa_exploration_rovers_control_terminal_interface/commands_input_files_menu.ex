@@ -1,9 +1,9 @@
-defmodule NasaExplorationRoversControlTerminalInterface.CommandsInputFilesMenu do
+defmodule NASAExplorationRoversControlTerminalInterface.CommandsInputFilesMenu do
   @moduledoc """
   This module contains logic to show terminal interface command input files menu to user and to handle user interactions.
   """
 
-  import NasaExplorationRoversControlTerminalInterface.IO
+  import NASAExplorationRoversControlTerminalInterface.IO
 
   @predefined_commands_input_files_path "priv/commands_input_files"
 
