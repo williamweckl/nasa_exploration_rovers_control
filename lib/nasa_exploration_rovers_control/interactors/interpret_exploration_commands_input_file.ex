@@ -7,6 +7,7 @@ defmodule NASAExplorationRoversControl.Interactors.InterpretExplorationCommandsI
 
   alias NASAExplorationRoversControl.ExplorationRover
 
+  @doc false
   def perform(file_path) do
     result = file_path
     |> File.read!()

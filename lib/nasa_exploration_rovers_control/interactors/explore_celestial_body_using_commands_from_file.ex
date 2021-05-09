@@ -8,6 +8,7 @@ defmodule NASAExplorationRoversControl.Interactors.ExploreCelestialBodyUsingComm
   alias NASAExplorationRoversControl.CelestialBodies
   alias NASAExplorationRoversControl.ExplorationRover
 
+  @doc false
   def perform(celestial_body_name, input_file) do
     celestial_body_name
     |> CelestialBodies.Factory.get_celestial_body_module()

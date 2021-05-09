@@ -7,6 +7,7 @@ defmodule NASAExplorationRoversControl.Interactors.RotateExplorationRover do
 
   alias NASAExplorationRoversControl.ExplorationRover
 
+  @doc false
   def perform(%ExplorationRover{direction: current_direction} = exploration_rover, "L") do
     new_direction = case current_direction do
       "N" -> "W"

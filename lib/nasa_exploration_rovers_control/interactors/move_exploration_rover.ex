@@ -7,6 +7,7 @@ defmodule NASAExplorationRoversControl.Interactors.MoveExplorationRover do
 
   alias NASAExplorationRoversControl.ExplorationRover
 
+  @doc false
   def perform(%ExplorationRover{position: current_position, direction: current_direction} = exploration_rover) do
     {x, y} = current_position
 
