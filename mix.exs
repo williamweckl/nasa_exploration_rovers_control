@@ -4,11 +4,20 @@ defmodule NASAExplorationRoversControl.MixProject do
   def project do
     [
       app: :nasa_exploration_rovers_control,
-      version: "0.1.0",
+      version: "1.0.0",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       elixirc_paths: elixirc_paths(Mix.env()),
-      deps: deps()
+      deps: deps(),
+
+      # Docs
+      name: "NASA Exploration Rovers Control",
+      source_url: "https://github.com/williamweckl/nasa_exploration_rovers_control",
+      homepage_url: "https://github.com/williamweckl/nasa_exploration_rovers_control",
+      docs: [
+        main: "NASA Exploration Rovers Control", # The main page in the docs
+        extras: ["README.md"]
+      ]
     ]
   end
 
@@ -26,7 +35,8 @@ defmodule NASAExplorationRoversControl.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:mock, "~> 0.3.0", only: :test}
+      {:mock, "~> 0.3.0", only: :test},
+      {:ex_doc, "~> 0.24", only: :dev, runtime: false},
     ]
   end
 end

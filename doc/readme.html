@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.24.2">
+    <meta name="project" content="NASA Exploration Rovers Control v1.0.0">
+
+    <title>NASA Exploration Rovers Control — NASA Exploration Rovers Control v1.0.0</title>
+    <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
+
+    <script src="dist/sidebar_items-ec0faf10f1.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/app-f27ff079945e43879c46.js"></script>
+
+
+  </head>
+  <body data-type="extras">
+    <script>
+
+      try {
+        if (localStorage.getItem('night-mode') === 'true') {
+          document.body.classList.add('night-mode');
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectDetails">
+      <a href="https://github.com/williamweckl/nasa_exploration_rovers_control" class="sidebar-projectName">
+NASA Exploration Rovers Control
+      </a>
+      <strong class="sidebar-projectVersion">
+        v1.0.0
+      </strong>
+    </div>
+
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+
+      <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+      <li><a id="tasks-list-link" href="#full-list">Mix Tasks</a></li>
+
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+<h1>NASA Exploration Rovers Control</h1><p>System designed to control exploration rovers.</p><h2 id="motivation" class="section-heading">
+  <a href="#motivation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Motivation
+</h2>
+<p>A set of exploration rovers has been sent by NASA to Mars and will land on a ground. This ground, must be explored by the rovers so that its built-in cameras can have a complete view of the area and send the images back to Earth.</p><h2 id="how-exploration-rovers-work" class="section-heading">
+  <a href="#how-exploration-rovers-work" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  How exploration rovers work
+</h2>
+<p>The position and direction of the exploration rover are represented by a combination of x-y coordinates and a letter representing the cardinal direction in which the rover points, following the <code class="inline">Wind Rose Compass</code>.</p><p><img src="https://github.com/williamweckl/nasa_exploration_rovers_control/raw/master/priv/readme_images/wind_rose_compass.jpg" alt="Wind Rose Compass"/></p><p>The highground is divided into a grid to simplify navigation. An example of a position would be (0, 0, N), which indicates that the rover is in the lower left corner and pointing north.</p><p>To control the rovers, NASA sends a simple sequence of letters. The letters are <strong>&quot;L&quot;</strong> (rotate the rover 90 degrees to Left), <strong>&quot;R&quot;</strong> (rotate the rover 90 degrees to Right) and <strong>&quot;M&quot;</strong> (Move the rover keeping it's direction).</p><p>In the grid, the point north of (x, y) is always (x, y + 1) and the point east of (x, y) is always (x + 1, y). I think you got the logic.</p><p>If you didn't understand for the first time do not feel dumd, I had to read it a few times and to draw it to understand. :joy:</p><p><img src="https://raw.githubusercontent.com/williamweckl/nasa_exploration_rovers_control/master/priv/readme_images/ground_grid.png" alt="Ground grid"/></p><h2 id="how-the-system-work" class="section-heading">
+  <a href="#how-the-system-work" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  How the system work
+</h2>
+<p>NASA engineers creates a file with all the exploration rovers instructions. This file is read by the system and is sent to exploration rovers.</p><p>This files also has to include at the first line the ground size. This is important to the system be able to predict if any rover will be off the ground after the commands are executed. If that's the case, the commands will not be sent to the specific rover and a friendly error will be outputed instead of the new rover coordinates.</p><p>It seems a little complex, but don't worry if you make some mistakes when writing this file, the system can handle most of them. But you will have a chance to review the instructions before confirming the submission.</p><p>This confirmation is important because the commands after being sent take about 8 minutes to reach the rovers if you are exploring Mars.</p><h3 id="the-commands-input-file" class="section-heading">
+  <a href="#the-commands-input-file" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  The commands input file
+</h3>
+<p>The first line is the ground size, the following lines are the exploration rover initial position and followed by another line with the commands that will be performed.</p><p>Example:</p><pre><code class="makeup elixir"><span class="mi">3</span><span class="w"> </span><span class="mi">8</span><span class="w">
+</span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="nc">N</span><span class="w">
+</span><span class="nc">MMM</span><span class="w">
+</span><span class="mi">3</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="nc">N</span><span class="w">
+</span><span class="nc">LMMM</span></code></pre><p>Explaining the example:</p><pre><code class="makeup elixir"><span class="mi">3</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="p" data-group-id="8187139316-1">(</span><span class="n">ground</span><span class="w"> </span><span class="n">size</span><span class="p" data-group-id="8187139316-1">)</span><span class="w">
+</span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="nc">N</span><span class="w"> </span><span class="p" data-group-id="8187139316-2">(</span><span class="nc">Rover</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">initial</span><span class="w"> </span><span class="n">position</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">direction</span><span class="p" data-group-id="8187139316-2">)</span><span class="w">
+</span><span class="nc">MMM</span><span class="w"> </span><span class="p" data-group-id="8187139316-3">(</span><span class="nc">Rover</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">commands</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">performed</span><span class="p" data-group-id="8187139316-3">)</span><span class="w">
+</span><span class="mi">3</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="nc">N</span><span class="w"> </span><span class="p" data-group-id="8187139316-4">(</span><span class="nc">Rover</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="n">initial</span><span class="w"> </span><span class="n">position</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">direction</span><span class="p" data-group-id="8187139316-4">)</span><span class="w">
+</span><span class="nc">LMMM</span><span class="w"> </span><span class="p" data-group-id="8187139316-5">(</span><span class="nc">Rover</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="n">commands</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">performed</span><span class="p" data-group-id="8187139316-5">)</span><span class="w">
+</span><span class="n">...</span><span class="w"> </span><span class="p" data-group-id="8187139316-6">(</span><span class="nc">And</span><span class="w"> </span><span class="n">so</span><span class="w"> </span><span class="n">on</span><span class="p">,</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">many</span><span class="w"> </span><span class="n">rovers</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="p">,</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">take</span><span class="w"> </span><span class="n">care</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">it</span><span class="p" data-group-id="8187139316-6">)</span></code></pre><h3 id="the-output" class="section-heading">
+  <a href="#the-output" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  The output
+</h3>
+<p>The output has in each line the new rover predicted position and direction (remember that it takes some time to the rovers to receive the commads, and the output will not wait for it).</p><p>Example:</p><pre><code class="makeup elixir"><span class="mi">0</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="nc">N</span><span class="w">
+</span><span class="mi">0</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="nc">W</span></code></pre><p>Explaining the example:</p><pre><code class="makeup elixir"><span class="mi">0</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="nc">N</span><span class="w"> </span><span class="p" data-group-id="0310398772-1">(</span><span class="nc">Rover</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">predicted</span><span class="w"> </span><span class="n">position</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">direction</span><span class="p" data-group-id="0310398772-1">)</span><span class="w">
+</span><span class="mi">0</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="nc">W</span><span class="w"> </span><span class="p" data-group-id="0310398772-2">(</span><span class="nc">Rover</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">predicted</span><span class="w"> </span><span class="n">position</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">direction</span><span class="p" data-group-id="0310398772-2">)</span><span class="w">
+</span><span class="n">...</span><span class="w"> </span><span class="p" data-group-id="0310398772-3">(</span><span class="nc">And</span><span class="w"> </span><span class="n">so</span><span class="w"> </span><span class="n">on</span><span class="p" data-group-id="0310398772-3">)</span></code></pre><h3 id="the-interface-to-interact" class="section-heading">
+  <a href="#the-interface-to-interact" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  The interface to interact
+</h3>
+<p>To interact with the system, for now we have a terminal interface but other ways can be added latter (see the architecture decisions section). You can run using your favorite linux terminal. Maybe it works on Windows and Mac too, but has not been tested.</p><p><img src="https://raw.githubusercontent.com/williamweckl/nasa_exploration_rovers_control/master/priv/readme_images/terminal_interface_1.png" alt="Terminal Interface 1"/></p><p><img src="https://raw.githubusercontent.com/williamweckl/nasa_exploration_rovers_control/master/priv/readme_images/terminal_interface_2.png" alt="Terminal Interface 2"/></p><p><img src="https://raw.githubusercontent.com/williamweckl/nasa_exploration_rovers_control/master/priv/readme_images/terminal_interface_3.png" alt="Terminal Interface 3"/></p><p><img src="https://raw.githubusercontent.com/williamweckl/nasa_exploration_rovers_control/master/priv/readme_images/terminal_interface_4.png" alt="Terminal Interface 4"/></p><p><img src="https://raw.githubusercontent.com/williamweckl/nasa_exploration_rovers_control/master/priv/readme_images/terminal_interface_5.png" alt="Terminal Interface 5"/></p><h2 id="architecture-decisions" class="section-heading">
+  <a href="#architecture-decisions" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Architecture decisions
+</h2>
+<p>Most of the architecture decisions was followed by conventions from Clean Architecture.</p><p>Clean architecture helps to isolate the business logic from the rest and let us developer to focus on what really matters, the business.</p><p>There is a clear separation between these two points of view in the project folder:</p><ul><li><code class="inline">lib/nasa_exploration_rovers_control</code> is for the business logic</li><li><code class="inline">lib/nasa_exploration_rovers_control_terminal_interface</code> is for the terminal interface, our delivery mechanism. Is the way our users will interact with the business logic</li></ul><p>At the business logic part, the file <code class="inline">lib/nasa_exploration_rovers_control.ex</code> is responsible to expose all the system use cases according to the business view for the product. This layer is known as our bounded context. It defined the boundaries, this should be the only file called by the delivery mechanisms.</p><p>At <code class="inline">lib/nasa_exploration_rovers_control/interactors</code> we can find all the use cases and it's rules.</p><p><code class="inline">lib/exploration_rover</code> is our entity, that represents a real Exploration Rover from the real world.</p><p>Another structure that was made, following another patterns, was the folder <code class="inline">lib/nasa_exploration_rovers_control/celestial_bodies</code> that contains all the specific celestial bodies business rules, like the rule that validates that the <code class="inline">Mars</code> ground is rectangular.</p><p>There is also another folder that worth to mention that is <code class="inline">lib/mix/tasks</code>. This folder just followed the Elixir conventions to create an automated task to start some things. We are using for now just to start our terminal interface.</p><h2 id="use-cases" class="section-heading">
+  <a href="#use-cases" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Use cases
+</h2>
+<ul><li>Explore Celestial Body Using Commands From File</li><li>Interpret Exploration Commands Input File</li><li>Execute Exploration Rover Commands</li><li>Rotate Exploration Rover</li><li>Move Exploration Rover</li></ul><p>You can see all of them with their docs and some examples in the file <code class="inline">lib/nasa_exploration_rovers_control.ex</code>.</p><h3 id="entities" class="section-heading">
+  <a href="#entities" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Entities
+</h3>
+<h4>Exploration Rover</h4><p>Exploration Rover entity, it represents a real exploration rover that is exploring another planet or satellite.</p><p>It has three attributes:</p><ul><li>position (required): A tuble with x and y axis.</li><li>direction (required): A direction according to the Wind Rose Compass represented by a single character string. Valid values are N, S, W, E.</li><li>commands: A list of commands to be performed by rover. Valid values for each command in the list are L (left), R (right) or M (move).</li></ul><p>It also has a bunch of validations to prevent invalid values to be placed in these attributes.</p><h2 id="some-other-crazy-decisions" class="section-heading">
+  <a href="#some-other-crazy-decisions" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Some other <del>crazy</del> decisions
+</h2>
+<ul><li>A structure of <strong>celestial bodies</strong> was created to keep some specific logics. For now there's just <code class="inline">Mars</code>, but other celestial bodies can be easily added in the future. After all, after conquering Mars, we won't want to stop here, will we?</li><li><code class="inline">Mars</code> also has a specific characteristic of having its grounds to be explored as being rectangular highlands, so a specific Mars validation has been added to not allow square grounds.</li><li>Some fake modules was created to be able to mock some Elixir and Erlang modules like <a href="https://hexdocs.pm/elixir/System.html"><code class="inline">System</code></a> and <code class="inline">:timer</code>. The decision of which module will be used is made by the environment (see <code class="inline">config</code> folder files). The default is to use the language modules, but this default is overwriten by the test environment.</li></ul><h2 id="requirements" class="section-heading">
+  <a href="#requirements" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Requirements
+</h2>
+<p>This project requires Elixir version 1.11 and nothing more. If you have an older version of Elixir you can change it at <code class="inline">mix.exs</code> and probably it will still work fine.</p><p>The system was tested on Linux, but probably will work on MacOS and Windows too.</p><h2 id="getting-started" class="section-heading">
+  <a href="#getting-started" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Getting Started
+</h2>
+<ol><li>Install the project dependencies. The project has only 2 dependencies: <code class="inline">mock</code> that is being used for mocking at tests and <code class="inline">ex_doc</code> that was used to generate the documentation.</li></ol><pre><code class="makeup elixir"><span class="err">$</span><span class="w"> </span><span class="n">mix</span><span class="w"> </span><span class="n">deps</span><span class="o">.</span><span class="n">get</span></code></pre><ol start="2"><li>Start the Terminal Interface and follow the instructions.</li></ol><pre><code class="makeup elixir"><span class="err">$</span><span class="w"> </span><span class="n">mix</span><span class="w"> </span><span class="n">start_terminal_interface</span></code></pre><p>More information can be obtained by running:</p><pre><code class="makeup elixir"><span class="err">$</span><span class="w"> </span><span class="n">mix</span><span class="w"> </span><span class="n">help</span><span class="w"> </span><span class="n">start_terminal_interface</span></code></pre><h2 id="testing" class="section-heading">
+  <a href="#testing" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Testing
+</h2>
+<pre><code class="makeup elixir"><span class="err">$</span><span class="w"> </span><span class="n">mix</span><span class="w"> </span><span class="n">test</span></code></pre><h2 id="updating-documentation" class="section-heading">
+  <a href="#updating-documentation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Updating documentation
+</h2>
+<pre><code class="makeup elixir"><span class="err">$</span><span class="w"> </span><span class="n">mix</span><span class="w"> </span><span class="n">docs</span></code></pre><h2 id="config" class="section-heading">
+  <a href="#config" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Config
+</h2>
+<p>There are a few configuration options at <code class="inline">config/config.exs</code> that can be changed:</p><ul><li>typing_effect_print_time: There is a typing effect used by Terminal Interface. I found cool but if you get bored just change it to 0.</li><li>user_reading_time: This is a time preconfigured to wait between some steps at the Terminal Interface to make the interface more user friendly.</li></ul><p>You don't need to change the other settings, changing it will affect the functioning of the Terminal Interface.</p><h2 id="contributing" class="section-heading">
+  <a href="#contributing" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Contributing
+</h2>
+<p>We encourage you to contribute to NASA Exploration Rovers Control! Just submit a PR that we will be happy to review.</p><p>Wanna contribute and don't know where to start? There are some cool features in my mind:</p><ul><li>Prevent exploration rovers colisions</li><li>The terminal interface could have the option to also receive the input commands by STDIO instead of only reading from files</li><li>The terminal interface could print the commands that will be performed in a more readable and humanized format, this could help to prevent some mistakes</li></ul><p>If you liked those ideas feel free to open a feature request issue or a PR. :stuck_out_tongue:</p><h2 id="wtf" class="section-heading">
+  <a href="#wtf" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Wtf?!
+</h2>
+<p>If you came this far and does not know why this crazy project was made, I'm happy that I've got your attention. :satisfied:</p><p>This was just an exercise made, and (at least for now :stuck_out_tongue_closed_eyes:) it has no real uses.</p><p>Thank you for the challenge, was real nice to work on it. :heart_eyes:</p>
+<div class="bottom-actions">
+  <div class="bottom-actions-item">
+
+      <a href="api-reference.html" class="bottom-actions-button" rel="prev">
+        <span class="subheader">
+          ← Previous Page
+        </span>
+        <span class="title">
+API Reference
+        </span>
+      </a>
+
+  </div>
+  <div class="bottom-actions-item">
+
+  </div>
+</div>
+
+      <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.24.2) for the
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank">Elixir programming language</a>.
+          </span>
+          <span class="line">
+            Designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
+        </p>
+        <p>
+
+            <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
+
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+          <button class="line footer-button night-mode-toggle">
+            Toggle night mode
+          </button>
+          <button class="line footer-button display-quick-switch">
+            Go to a HexDocs package
+          </button>
+          <button class="line footer-button tooltips-toggle">
+            <span class="tooltips-option-disable">Disable tooltips</span>
+            <span class="tooltips-option-enable">Enable tooltips</span>
+          </button>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+
+
+  </body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.24.2">
+    <meta name="project" content="NASA Exploration Rovers Control v1.0.0">
+
+    <title>NASAExplorationRoversControl.move_exploration_rover — NASA Exploration Rovers Control v1.0.0</title>
+    <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
+
+    <script src="dist/sidebar_items-ec0faf10f1.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/app-f27ff079945e43879c46.js"></script>
+
+
+  </head>
+  <body data-type="modules">
+    <script>
+
+      try {
+        if (localStorage.getItem('night-mode') === 'true') {
+          document.body.classList.add('night-mode');
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectDetails">
+      <a href="https://github.com/williamweckl/nasa_exploration_rovers_control" class="sidebar-projectName">
+NASA Exploration Rovers Control
+      </a>
+      <strong class="sidebar-projectVersion">
+        v1.0.0
+      </strong>
+    </div>
+
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+
+      <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+      <li><a id="tasks-list-link" href="#full-list">Mix Tasks</a></li>
+
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+<h1>NASAExplorationRoversControl.move_exploration_rover</h1>
+
+<div class="deprecated">
+  You're seeing just the function <code>move_exploration_rover</code>, go back to <a href="NASAExplorationRoversControl.html">NASAExplorationRoversControl</a> module for more information.
+</div>
+
+<section class="detail" id="move_exploration_rover/1">
+
+  <div class="detail-header">
+    <a href="#move_exploration_rover/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">move_exploration_rover(exploration_rover)</h1>
+
+      <a href="https://github.com/williamweckl/nasa_exploration_rovers_control/blob/master/lib/nasa_exploration_rovers_control.ex#L192" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Moves an exploration rover according to its current direction.
+The result of this function will be the exploration rover with a new position.</p><h2 id="move_exploration_rover/1-examples" class="section-heading">
+  <a href="#move_exploration_rover/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">move_exploration_rover</span><span class="p" data-group-id="5105929719-1">(</span><span class="p" data-group-id="5105929719-2">%</span><span class="nc" data-group-id="5105929719-2">Elixir.NASAExplorationRoversControl.ExplorationRover</span><span class="p" data-group-id="5105929719-2">{</span><span class="ss">position</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5105929719-3">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p" data-group-id="5105929719-3">}</span><span class="p">,</span><span class="w"> </span><span class="ss">direction</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;N&quot;</span><span class="p" data-group-id="5105929719-2">}</span><span class="p" data-group-id="5105929719-1">)</span><span class="w">
+</span><span class="p" data-group-id="5105929719-4">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5105929719-5">%</span><span class="nc" data-group-id="5105929719-5">Elixir.NASAExplorationRoversControl.ExplorationRover</span><span class="p" data-group-id="5105929719-5">{</span><span class="ss">position</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5105929719-6">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p" data-group-id="5105929719-6">}</span><span class="p">,</span><span class="w"> </span><span class="ss">direction</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;N&quot;</span><span class="p" data-group-id="5105929719-5">}</span><span class="p" data-group-id="5105929719-4">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">move_exploration_rover</span><span class="p" data-group-id="5105929719-7">(</span><span class="p" data-group-id="5105929719-8">%</span><span class="nc" data-group-id="5105929719-8">Elixir.NASAExplorationRoversControl.ExplorationRover</span><span class="p" data-group-id="5105929719-8">{</span><span class="ss">position</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5105929719-9">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p" data-group-id="5105929719-9">}</span><span class="p">,</span><span class="w"> </span><span class="ss">direction</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;N&quot;</span><span class="p" data-group-id="5105929719-8">}</span><span class="p" data-group-id="5105929719-7">)</span><span class="w">
+</span><span class="p" data-group-id="5105929719-10">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5105929719-11">%</span><span class="nc" data-group-id="5105929719-11">Elixir.NASAExplorationRoversControl.ExplorationRover</span><span class="p" data-group-id="5105929719-11">{</span><span class="ss">position</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5105929719-12">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p" data-group-id="5105929719-12">}</span><span class="p">,</span><span class="w"> </span><span class="ss">direction</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;N&quot;</span><span class="p" data-group-id="5105929719-11">}</span><span class="p" data-group-id="5105929719-10">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">move_exploration_rover</span><span class="p" data-group-id="5105929719-13">(</span><span class="p" data-group-id="5105929719-14">%</span><span class="nc" data-group-id="5105929719-14">Elixir.NASAExplorationRoversControl.ExplorationRover</span><span class="p" data-group-id="5105929719-14">{</span><span class="ss">position</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5105929719-15">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p" data-group-id="5105929719-15">}</span><span class="p">,</span><span class="w"> </span><span class="ss">direction</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;S&quot;</span><span class="p" data-group-id="5105929719-14">}</span><span class="p" data-group-id="5105929719-13">)</span><span class="w">
+</span><span class="p" data-group-id="5105929719-16">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5105929719-17">%</span><span class="nc" data-group-id="5105929719-17">Elixir.NASAExplorationRoversControl.ExplorationRover</span><span class="p" data-group-id="5105929719-17">{</span><span class="ss">position</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5105929719-18">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p" data-group-id="5105929719-18">}</span><span class="p">,</span><span class="w"> </span><span class="ss">direction</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;S&quot;</span><span class="p" data-group-id="5105929719-17">}</span><span class="p" data-group-id="5105929719-16">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">move_exploration_rover</span><span class="p" data-group-id="5105929719-19">(</span><span class="p" data-group-id="5105929719-20">%</span><span class="nc" data-group-id="5105929719-20">Elixir.NASAExplorationRoversControl.ExplorationRover</span><span class="p" data-group-id="5105929719-20">{</span><span class="ss">position</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5105929719-21">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p" data-group-id="5105929719-21">}</span><span class="p">,</span><span class="w"> </span><span class="ss">direction</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;S&quot;</span><span class="p" data-group-id="5105929719-20">}</span><span class="p" data-group-id="5105929719-19">)</span><span class="w">
+</span><span class="p" data-group-id="5105929719-22">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5105929719-23">%</span><span class="nc" data-group-id="5105929719-23">Elixir.NASAExplorationRoversControl.ExplorationRover</span><span class="p" data-group-id="5105929719-23">{</span><span class="ss">position</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5105929719-24">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p" data-group-id="5105929719-24">}</span><span class="p">,</span><span class="w"> </span><span class="ss">direction</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;S&quot;</span><span class="p" data-group-id="5105929719-23">}</span><span class="p" data-group-id="5105929719-22">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">move_exploration_rover</span><span class="p" data-group-id="5105929719-25">(</span><span class="p" data-group-id="5105929719-26">%</span><span class="nc" data-group-id="5105929719-26">Elixir.NASAExplorationRoversControl.ExplorationRover</span><span class="p" data-group-id="5105929719-26">{</span><span class="ss">position</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5105929719-27">{</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p" data-group-id="5105929719-27">}</span><span class="p">,</span><span class="w"> </span><span class="ss">direction</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;W&quot;</span><span class="p" data-group-id="5105929719-26">}</span><span class="p" data-group-id="5105929719-25">)</span><span class="w">
+</span><span class="p" data-group-id="5105929719-28">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5105929719-29">%</span><span class="nc" data-group-id="5105929719-29">Elixir.NASAExplorationRoversControl.ExplorationRover</span><span class="p" data-group-id="5105929719-29">{</span><span class="ss">position</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5105929719-30">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p" data-group-id="5105929719-30">}</span><span class="p">,</span><span class="w"> </span><span class="ss">direction</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;W&quot;</span><span class="p" data-group-id="5105929719-29">}</span><span class="p" data-group-id="5105929719-28">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">move_exploration_rover</span><span class="p" data-group-id="5105929719-31">(</span><span class="p" data-group-id="5105929719-32">%</span><span class="nc" data-group-id="5105929719-32">Elixir.NASAExplorationRoversControl.ExplorationRover</span><span class="p" data-group-id="5105929719-32">{</span><span class="ss">position</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5105929719-33">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p" data-group-id="5105929719-33">}</span><span class="p">,</span><span class="w"> </span><span class="ss">direction</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;W&quot;</span><span class="p" data-group-id="5105929719-32">}</span><span class="p" data-group-id="5105929719-31">)</span><span class="w">
+</span><span class="p" data-group-id="5105929719-34">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5105929719-35">%</span><span class="nc" data-group-id="5105929719-35">Elixir.NASAExplorationRoversControl.ExplorationRover</span><span class="p" data-group-id="5105929719-35">{</span><span class="ss">position</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5105929719-36">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p" data-group-id="5105929719-36">}</span><span class="p">,</span><span class="w"> </span><span class="ss">direction</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;W&quot;</span><span class="p" data-group-id="5105929719-35">}</span><span class="p" data-group-id="5105929719-34">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">move_exploration_rover</span><span class="p" data-group-id="5105929719-37">(</span><span class="p" data-group-id="5105929719-38">%</span><span class="nc" data-group-id="5105929719-38">Elixir.NASAExplorationRoversControl.ExplorationRover</span><span class="p" data-group-id="5105929719-38">{</span><span class="ss">position</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5105929719-39">{</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p" data-group-id="5105929719-39">}</span><span class="p">,</span><span class="w"> </span><span class="ss">direction</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;E&quot;</span><span class="p" data-group-id="5105929719-38">}</span><span class="p" data-group-id="5105929719-37">)</span><span class="w">
+</span><span class="p" data-group-id="5105929719-40">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5105929719-41">%</span><span class="nc" data-group-id="5105929719-41">Elixir.NASAExplorationRoversControl.ExplorationRover</span><span class="p" data-group-id="5105929719-41">{</span><span class="ss">position</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5105929719-42">{</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p" data-group-id="5105929719-42">}</span><span class="p">,</span><span class="w"> </span><span class="ss">direction</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;E&quot;</span><span class="p" data-group-id="5105929719-41">}</span><span class="p" data-group-id="5105929719-40">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">move_exploration_rover</span><span class="p" data-group-id="5105929719-43">(</span><span class="p" data-group-id="5105929719-44">%</span><span class="nc" data-group-id="5105929719-44">Elixir.NASAExplorationRoversControl.ExplorationRover</span><span class="p" data-group-id="5105929719-44">{</span><span class="ss">position</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5105929719-45">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p" data-group-id="5105929719-45">}</span><span class="p">,</span><span class="w"> </span><span class="ss">direction</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;E&quot;</span><span class="p" data-group-id="5105929719-44">}</span><span class="p" data-group-id="5105929719-43">)</span><span class="w">
+</span><span class="p" data-group-id="5105929719-46">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5105929719-47">%</span><span class="nc" data-group-id="5105929719-47">Elixir.NASAExplorationRoversControl.ExplorationRover</span><span class="p" data-group-id="5105929719-47">{</span><span class="ss">position</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5105929719-48">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p" data-group-id="5105929719-48">}</span><span class="p">,</span><span class="w"> </span><span class="ss">direction</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;E&quot;</span><span class="p" data-group-id="5105929719-47">}</span><span class="p" data-group-id="5105929719-46">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">move_exploration_rover</span><span class="p" data-group-id="5105929719-49">(</span><span class="p" data-group-id="5105929719-50">%</span><span class="nc" data-group-id="5105929719-50">Elixir.NASAExplorationRoversControl.ExplorationRover</span><span class="p" data-group-id="5105929719-50">{</span><span class="ss">position</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5105929719-51">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p" data-group-id="5105929719-51">}</span><span class="p">,</span><span class="w"> </span><span class="ss">direction</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;S&quot;</span><span class="p" data-group-id="5105929719-50">}</span><span class="p" data-group-id="5105929719-49">)</span><span class="w">
+</span><span class="p" data-group-id="5105929719-52">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Invalid position. Coordinates must not be negative.&quot;</span><span class="p" data-group-id="5105929719-52">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">move_exploration_rover</span><span class="p" data-group-id="5105929719-53">(</span><span class="p" data-group-id="5105929719-54">%</span><span class="nc" data-group-id="5105929719-54">Elixir.NASAExplorationRoversControl.ExplorationRover</span><span class="p" data-group-id="5105929719-54">{</span><span class="ss">position</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5105929719-55">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p" data-group-id="5105929719-55">}</span><span class="p">,</span><span class="w"> </span><span class="ss">direction</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;W&quot;</span><span class="p" data-group-id="5105929719-54">}</span><span class="p" data-group-id="5105929719-53">)</span><span class="w">
+</span><span class="p" data-group-id="5105929719-56">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Invalid position. Coordinates must not be negative.&quot;</span><span class="p" data-group-id="5105929719-56">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">move_exploration_rover</span><span class="p" data-group-id="5105929719-57">(</span><span class="p" data-group-id="5105929719-58">%</span><span class="nc" data-group-id="5105929719-58">Elixir.NASAExplorationRoversControl.ExplorationRover</span><span class="p" data-group-id="5105929719-58">{</span><span class="ss">position</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5105929719-59">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p" data-group-id="5105929719-59">}</span><span class="p">,</span><span class="w"> </span><span class="ss">direction</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;I&quot;</span><span class="p" data-group-id="5105929719-58">}</span><span class="p" data-group-id="5105929719-57">)</span><span class="w">
+</span><span class="gt">** (RuntimeError) Exploration rover has an invalid direction</span></code></pre>
+  </section>
+</section>
+
+
+      <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.24.2) for the
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank">Elixir programming language</a>.
+          </span>
+          <span class="line">
+            Designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
+        </p>
+        <p>
+
+            <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
+
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+          <button class="line footer-button night-mode-toggle">
+            Toggle night mode
+          </button>
+          <button class="line footer-button display-quick-switch">
+            Go to a HexDocs package
+          </button>
+          <button class="line footer-button tooltips-toggle">
+            <span class="tooltips-option-disable">Disable tooltips</span>
+            <span class="tooltips-option-enable">Enable tooltips</span>
+          </button>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+
+
+  </body>
+</html>

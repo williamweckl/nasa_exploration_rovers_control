@@ -148,7 +148,7 @@ The system was tested on Linux, but probably will work on MacOS and Windows too.
 
 ## Getting Started
 
-1. Install the project dependencies. The only dependency that it has is `mock` and is required only for running tests, but you probably need to run the below command anyway.
+1. Install the project dependencies. The project has only 2 dependencies: `mock` that is being used for mocking at tests and `ex_doc` that was used to generate the documentation.
 
 ```
 $ mix deps.get
@@ -170,6 +170,12 @@ $ mix help start_terminal_interface
 
 ```
 $ mix test
+```
+
+## Updating documentation
+
+```
+$ mix docs
 ```
 
 ## Config
