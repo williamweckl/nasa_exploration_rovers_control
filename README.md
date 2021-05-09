@@ -10,7 +10,7 @@ A set of exploration rovers has been sent by NASA to Mars and will land on a gro
 
 The position and direction of the exploration rover are represented by a combination of x-y coordinates and a letter representing the cardinal direction in which the rover points, following the `Wind Rose Compass`.
 
-![Wind Rose Compass](https://github.com/williamweckl/nasa_exploration_rovers_control/raw/master/priv/readme_images/wind_rose_compass.jpg | width=100)
+![Wind Rose Compass](https://github.com/williamweckl/nasa_exploration_rovers_control/raw/master/priv/readme_images/wind_rose_compass.jpg)
 
 The highground is divided into a grid to simplify navigation. An example of a position would be (0, 0, N), which indicates that the rover is in the lower left corner and pointing north.
 
