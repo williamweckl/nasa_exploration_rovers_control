@@ -9,6 +9,7 @@ defmodule NASAExplorationRoversControl.MixProject do
       start_permanent: Mix.env() == :prod,
       elixirc_paths: elixirc_paths(Mix.env()),
       deps: deps(),
+      test_coverage: [tool: ExCoveralls],
 
       # Docs
       name: "NASA Exploration Rovers Control",
@@ -37,7 +38,8 @@ defmodule NASAExplorationRoversControl.MixProject do
     [
       {:mock, "~> 0.3.0", only: :test},
       {:ex_doc, "~> 0.24", only: :dev, runtime: false},
-      {:credo, "~> 1.5", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
+      {:excoveralls, "~> 0.13", only: :test, runtime: false}
     ]
   end
 end

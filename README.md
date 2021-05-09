@@ -150,7 +150,7 @@ The system was tested on Linux, but probably will work on MacOS and Windows too.
 
 ## Getting Started
 
-1. Install the project dependencies. The project has only 3 dependencies: `mock` that is being used for mocking at tests; `ex_doc` that was used to generate the documentation; `credo` used as code linter.
+1. Install the project dependencies. The project has only 4 dependencies: `mock` that is being used for mocking at tests; `ex_doc` that was used to generate the documentation; `credo` used as code linter; `excoveralls` for test coverage checks.
 
 ```
 $ mix deps.get
@@ -174,6 +174,12 @@ $ mix help start_terminal_interface
 $ mix test
 ```
 
+Or running with coverage check:
+
+```
+$ MIX_ENV=test mix coveralls.html
+```
+
 ## Generating documentation
 
 ```
@@ -184,6 +190,12 @@ $ mix docs
 
 ```
 $ mix credo
+```
+
+## Verifying if dependencies are up to date
+
+```
+$ mix hex.outdated
 ```
 
 ## Config
