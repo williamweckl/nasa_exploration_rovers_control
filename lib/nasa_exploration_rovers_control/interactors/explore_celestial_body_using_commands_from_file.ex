@@ -44,13 +44,8 @@ defmodule NASAExplorationRoversControl.Interactors.ExploreCelestialBodyUsingComm
     exploration_rovers = exploration_rovers
     |> Enum.with_index()
     |> Enum.map(fn {exploration_rover, rover_index} ->
-      result = case exploration_rover do
-        %ExplorationRover{} ->
-          exploration_rover
-          |> prevent_exploration_rover_to_colide_with_others(rover_index, exploration_rovers)
-        {:error, _error_message} ->
-          exploration_rover
-      end
+      result = exploration_rover
+        |> prevent_exploration_rover_to_colide_with_others(rover_index, exploration_rovers)
 
       case result do
         {:ok, exploration_rover} -> exploration_rover
