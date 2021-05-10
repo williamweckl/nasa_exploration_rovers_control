@@ -41,6 +41,23 @@ defmodule NASAExplorationRoversControl.Interactors.ExploreCelestialBodyUsingComm
       end
     end)
 
+    exploration_rovers = exploration_rovers
+    |> Enum.with_index()
+    |> Enum.map(fn {exploration_rover, rover_index} ->
+      result = case exploration_rover do
+        %ExplorationRover{} ->
+          exploration_rover
+          |> prevent_exploration_rover_to_colide_with_others(rover_index, exploration_rovers)
+        {:error, _error_message} ->
+          exploration_rover
+      end
+
+      case result do
+        {:ok, exploration_rover} -> exploration_rover
+        {:error, _error_message} -> result
+      end
+    end)
+
     {:ok, %{ground_size: ground_size, exploration_rovers: exploration_rovers}}
   end
   defp explore({:error, _error_message} = error_result), do: error_result
@@ -56,5 +73,36 @@ defmodule NASAExplorationRoversControl.Interactors.ExploreCelestialBodyUsingComm
   defp prevent_exploration_rover_to_leave_the_ground({:error, _error_message} = error_result, _ground_size) do
     error_result
   end
+
+  defp prevent_exploration_rover_to_colide_with_others(
+    %ExplorationRover{position: position} = exploration_rover,
+    rover_index,
+    exploration_rovers
+  ) do
+    other_exploration_rover_with_the_same_position_index = exploration_rovers
+      |> Enum.with_index()
+      |> Enum.find_index(fn {other_exploration_rover, index} ->
+        case other_exploration_rover do
+          %ExplorationRover{} -> other_exploration_rover.position == position && index != rover_index
+          _ -> false
+        end
+      end)
+
+    if other_exploration_rover_with_the_same_position_index do
+      {
+        :error,
+        "The system prevented this rover to colide with Rover " <>
+        "#{other_exploration_rover_with_the_same_position_index + 1}. After the movements, this would happen. " <>
+        "Please fix it and try again."
+      }
+    else
+      {:ok, exploration_rover}
+    end
+  end
+  defp prevent_exploration_rover_to_colide_with_others(
+    {:error, _error_message} = error_result,
+    _rover_index,
+    _ground_size
+  ), do: error_result
 
 end

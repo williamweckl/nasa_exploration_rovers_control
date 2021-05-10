@@ -53,8 +53,8 @@ defmodule NASAExplorationRoversControl do
         ground_size: {10, 11},
         exploration_rovers: [
           %#{ExplorationRover}{position: {0, 4}, direction: "N", commands: []},
-          %#{ExplorationRover}{position: {2, 8}, direction: "W", commands: []},
-          %#{ExplorationRover}{position: {2, 8}, direction: "E", commands: []},
+          {:error, "The system prevented this rover to colide with Rover 3. After the movements, this would happen. Please fix it and try again."},
+          {:error, "The system prevented this rover to colide with Rover 2. After the movements, this would happen. Please fix it and try again."}
         ]
       }}
 

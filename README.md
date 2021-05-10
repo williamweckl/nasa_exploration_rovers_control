@@ -215,7 +215,6 @@ We encourage you to contribute to NASA Exploration Rovers Control! Just submit a
 
 Wanna contribute and don't know where to start? There are some cool features in my mind:
 
-- Prevent exploration rovers colisions
 - Colorize the terminal interface messages. That would be cool, han?
 - The terminal interface could have the option to also receive the input commands by STDIO instead of only reading from files
 - The terminal interface could print the commands that will be performed in a more readable and humanized format, this could help to prevent some mistakes
