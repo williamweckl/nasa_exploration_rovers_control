@@ -92,6 +92,8 @@ To interact with the system, for now we have a terminal interface but other ways
 
 ![Terminal Interface 5](https://raw.githubusercontent.com/williamweckl/nasa_exploration_rovers_control/master/priv/readme_images/terminal_interface_5.png)
 
+The predefined commands input file from the option 2 is the only one that is 100% valid. The others will return some errors. You can play it around creating new files at this folder, it will be automatically detected, just don't forget to adjust the unit tests after placing a new file to this folder. To avoid breaking the tests, you can place your file elsewhere and use the last option informing the file path.
+
 ## Architecture decisions
 
 Most of the architecture decisions was followed by conventions from Clean Architecture.
