@@ -26,13 +26,18 @@ defmodule NASAExplorationRoversControl.Interactors.ExploreCelestialBodyUsingComm
   defp explore({:ok, %{ground_size: ground_size, exploration_rovers: exploration_rovers}}) do
     exploration_rovers = exploration_rovers
     |> Enum.map(fn exploration_rover ->
-      result = exploration_rover
-      |> NASAExplorationRoversControl.execute_exploration_rover_commands()
-      |> prevent_exploration_rover_to_leave_the_ground(ground_size)
+      result = case exploration_rover do
+        %ExplorationRover{} ->
+          exploration_rover
+          |> NASAExplorationRoversControl.execute_exploration_rover_commands()
+          |> prevent_exploration_rover_to_leave_the_ground(ground_size)
+        {:error, _error_message} ->
+          exploration_rover
+      end
 
       case result do
         {:ok, exploration_rover} -> exploration_rover
-        result -> result
+        {:error, _error_message} -> result
       end
     end)
 

@@ -11,16 +11,14 @@ defmodule NASAExplorationRoversControl.Interactors.InterpretExplorationCommandsI
         "#{@commands_input_files_base_path}/with_2k_exploration_rovers"
       )
 
-      exploration_rover = %NASAExplorationRoversControl.ExplorationRover{
-        commands: ["L", "M"], direction: "N", position: {1, 2}
-      }
-
-      exploration_rovers = Enum.map(1..2000, fn _ ->
-        exploration_rover
+      exploration_rovers = Enum.map(1..2000, fn index ->
+        %NASAExplorationRoversControl.ExplorationRover{
+          commands: ["M"], direction: "N", position: {index, 1}
+        }
       end)
 
       assert result == {:ok, %{
-        ground_size: {5, 5},
+        ground_size: {2000, 5},
         exploration_rovers: exploration_rovers
       }}
     end
@@ -140,6 +138,21 @@ defmodule NASAExplorationRoversControl.Interactors.InterpretExplorationCommandsI
       )
 
       assert result == {:error, "Ground size is invalid."}
+    end
+
+    test "with two rovers in the same initial position" do
+      result = InterpretExplorationCommandsInputFile.perform(
+        "#{@commands_input_files_base_path}/with_two_rovers_at_the_same_initial_position"
+      )
+
+      assert result == {:ok, %{
+        ground_size: {10, 11},
+        exploration_rovers: [
+          %NASAExplorationRoversControl.ExplorationRover{commands: ["M", "M", "M", "L", "R", "M"], direction: "N", position: {0, 0}},
+          %NASAExplorationRoversControl.ExplorationRover{commands: ["L", "M"], direction: "N", position: {3, 8}},
+          {:error, "There is something wrong with the initial position of this rover. It is the same as Rover 1 and it is probably wrong as the system prevents rover colisions. Please fix it and try again."}
+        ]
+      }}
     end
   end
 

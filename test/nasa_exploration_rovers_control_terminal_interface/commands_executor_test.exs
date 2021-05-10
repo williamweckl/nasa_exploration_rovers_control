@@ -116,13 +116,14 @@ defmodule NASAExplorationRoversControlTerminalInterface.CommandsExecutorTest do
         }
         new_state = CommandsExecutor.explore_celestial_body_using_commands_from_selected_file(state)
 
-        execution_output = "0 4 N\n0 8 W\nThe system prevented the exploration rover from leaving the ground." <>
-                           " Check the commands and try again. The exploration rover was kept in the initial " <>
-                           "position and direction.\n1 1 W\nThe system prevented the exploration rover from " <>
-                           "leaving the ground. Check the commands and try again. The exploration rover was kept " <>
-                           "in the initial position and direction.\nThe system prevented the exploration rover " <>
-                           "from leaving the ground. Check the commands and try again. The exploration rover was " <>
-                           "kept in the initial position and direction."
+        execution_output = "0 4 N\n0 8 W\nThere is something wrong with the initial position of this rover. " <>
+                           "It is the same as Rover 1 and it is probably wrong as the system prevents rover " <>
+                           "colisions. Please fix it and try again.\n1 1 W\nThere is something wrong with the " <>
+                           "initial position of this rover. It is the same as Rover 1 and it is probably wrong " <>
+                           "as the system prevents rover colisions. Please fix it and try again.\n" <>
+                           "The system prevented the exploration rover from leaving the ground. " <>
+                           "Check the commands and try again. The exploration rover was kept in the " <>
+                           "initial position and direction."
 
         assert new_state == %{
           selected_celestial_body: @selected_celestial_body,

@@ -18,23 +18,33 @@ defmodule NASAExplorationRoversControl do
 
       iex> explore_celestial_body_using_commands_from_file("mars", "priv/commands_input_files/mars/exploration_attempt_2_by_zena_cardman_2030_05_09")
       {:ok, %{
-        ground_size: {3,8},
+        ground_size: {3, 8},
         exploration_rovers: [
-          %#{ExplorationRover}{position: {0,3}, direction: "N", commands: []},
-          %#{ExplorationRover}{position: {0,8}, direction: "W", commands: []}
+          %#{ExplorationRover}{position: {0, 3}, direction: "N", commands: []},
+          %#{ExplorationRover}{position: {0, 8}, direction: "W", commands: []}
         ]
       }}
 
       iex> explore_celestial_body_using_commands_from_file("mars", "priv/commands_input_files/mars/exploration_attempt_3_by_raja_chari_2030_05_11")
       {:ok, %{
-        ground_size: {3,8},
+        ground_size: {3, 8},
         exploration_rovers: [
-          %#{ExplorationRover}{position: {0,4}, direction: "N", commands: []},
-          %#{ExplorationRover}{position: {0,8}, direction: "W", commands: []},
+          %#{ExplorationRover}{position: {0, 4}, direction: "N", commands: []},
+          %#{ExplorationRover}{position: {0, 8}, direction: "W", commands: []},
+          {:error, "There is something wrong with the initial position of this rover. It is the same as Rover 1 and it is probably wrong as the system prevents rover colisions. Please fix it and try again."},
+          %NASAExplorationRoversControl.ExplorationRover{commands: [], direction: "W", position: {1, 1}},
+          {:error, "There is something wrong with the initial position of this rover. It is the same as Rover 1 and it is probably wrong as the system prevents rover colisions. Please fix it and try again."},
           {:error, "The system prevented the exploration rover from leaving the ground. Check the commands and try again. The exploration rover was kept in the initial position and direction."},
-          %#{ExplorationRover}{position: {1,1}, direction: "W", commands: []},
-          {:error, "The system prevented the exploration rover from leaving the ground. Check the commands and try again. The exploration rover was kept in the initial position and direction."},
-          {:error, "The system prevented the exploration rover from leaving the ground. Check the commands and try again. The exploration rover was kept in the initial position and direction."},
+        ]
+      }}
+
+      iex> explore_celestial_body_using_commands_from_file("mars", "priv/commands_input_files/mars/exploration_attempt_4_by_zena_cardman_2030_05_11")
+      {:ok, %{
+        ground_size: {10, 11},
+        exploration_rovers: [
+          %#{ExplorationRover}{position: {0, 4}, direction: "N", commands: []},
+          %#{ExplorationRover}{position: {2, 8}, direction: "W", commands: []},
+          {:error, "There is something wrong with the initial position of this rover. It is the same as Rover 1 and it is probably wrong as the system prevents rover colisions. Please fix it and try again."}
         ]
       }}
 

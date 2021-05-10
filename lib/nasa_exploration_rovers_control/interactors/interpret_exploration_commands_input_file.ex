@@ -71,6 +71,7 @@ defmodule NASAExplorationRoversControl.Interactors.InterpretExplorationCommandsI
     |> parse_exploration_rover_commands_string(next_line)
     |> initialize_exploration_rover()
     |> give_commands_to_exploration_rover()
+    |> validate_exploration_rover_initial_position_comparing_to_others(row_index, exploration_rovers)
 
     normalized_result = case result do
       {:ok, exploration_rover} -> exploration_rover
@@ -84,7 +85,7 @@ defmodule NASAExplorationRoversControl.Interactors.InterpretExplorationCommandsI
     {:error, "Exploration rovers list is empty."}
   end
   defp validate_exploration_rovers_is_not_an_empty_list(%{exploration_rovers: _exploration_rovers} = input), do: input
-  defp validate_exploration_rovers_is_not_an_empty_list(error_result), do: error_result
+  defp validate_exploration_rovers_is_not_an_empty_list({:error, _error_message} = error_result), do: error_result
 
   defp is_exploration_rover_position_row?(row_index) do
     # The even rows defines the exploration rover positions
@@ -112,20 +113,44 @@ defmodule NASAExplorationRoversControl.Interactors.InterpretExplorationCommandsI
     {:ok, input}
   end
   defp parse_exploration_rover_commands_string({:ok, _}, nil), do: {:error, "Commands list must not be empty."}
-  defp parse_exploration_rover_commands_string({:error, _} = result, _commands_string), do: result
+  defp parse_exploration_rover_commands_string({:error, _error_message} = error_result, _commands_string) do
+    error_result
+  end
 
   defp initialize_exploration_rover({:ok, %{position: position, direction: direction} = input}) do
     {:ok, exploration_rover} = ExplorationRover.new(position: position, direction: direction)
 
     {:ok, %{exploration_rover: exploration_rover, input: input}}
   end
-  defp initialize_exploration_rover(result), do: result
+  defp initialize_exploration_rover({:error, _error_message} = error_result), do: error_result
 
   defp give_commands_to_exploration_rover(
     {:ok, %{exploration_rover: exploration_rover, input: %{commands: commands}}}
   ) do
     exploration_rover |> ExplorationRover.give_commands(commands)
   end
-  defp give_commands_to_exploration_rover(result), do: result
+  defp give_commands_to_exploration_rover({:error, _error_message} = error_result), do: error_result
+
+  defp validate_exploration_rover_initial_position_comparing_to_others(
+    {:ok, %ExplorationRover{position: position} = exploration_rover}, row_index, exploration_rovers
+  ) do
+    other_exploration_rover_with_the_same_position_index = exploration_rovers
+      |> Enum.with_index()
+      |> Enum.find_index(fn {other_exploration_rover, index} ->
+        case other_exploration_rover do
+          %ExplorationRover{} -> other_exploration_rover.position == position && index != row_index
+          _ -> false
+        end
+      end)
+
+    if other_exploration_rover_with_the_same_position_index do
+      {:error, "There is something wrong with the initial position of this rover. It is the same as Rover #{other_exploration_rover_with_the_same_position_index + 1} and it is probably wrong as the system prevents rover colisions. Please fix it and try again."}
+    else
+      {:ok, exploration_rover}
+    end
+  end
+  defp validate_exploration_rover_initial_position_comparing_to_others(
+    {:error, _error_message} = error_result, _row_index, _exploration_rovers
+  ), do: error_result
 
 end
