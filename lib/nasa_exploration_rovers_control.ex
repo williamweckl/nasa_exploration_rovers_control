@@ -31,9 +31,9 @@ defmodule NASAExplorationRoversControl do
         exploration_rovers: [
           %#{ExplorationRover}{position: {0, 4}, direction: "N", commands: []},
           %#{ExplorationRover}{position: {0, 8}, direction: "W", commands: []},
-          {:error, "There is something wrong with the initial position of this rover. It is the same as Rover 1 and it is probably wrong as the system prevents rover colisions. Please fix it and try again."},
+          {:error, "There is something wrong with the initial position of this rover. It is the same as Rover 1 and it is probably wrong as the system prevents rover collisions. Please fix it and try again."},
           %NASAExplorationRoversControl.ExplorationRover{commands: [], direction: "W", position: {1, 1}},
-          {:error, "There is something wrong with the initial position of this rover. It is the same as Rover 1 and it is probably wrong as the system prevents rover colisions. Please fix it and try again."},
+          {:error, "There is something wrong with the initial position of this rover. It is the same as Rover 1 and it is probably wrong as the system prevents rover collisions. Please fix it and try again."},
           {:error, "The system prevented the exploration rover from leaving the ground. Check the commands and try again. The exploration rover was kept in the initial position and direction."},
         ]
       }}
@@ -44,7 +44,7 @@ defmodule NASAExplorationRoversControl do
         exploration_rovers: [
           %#{ExplorationRover}{position: {0, 4}, direction: "N", commands: []},
           %#{ExplorationRover}{position: {2, 8}, direction: "W", commands: []},
-          {:error, "There is something wrong with the initial position of this rover. It is the same as Rover 1 and it is probably wrong as the system prevents rover colisions. Please fix it and try again."}
+          {:error, "There is something wrong with the initial position of this rover. It is the same as Rover 1 and it is probably wrong as the system prevents rover collisions. Please fix it and try again."}
         ]
       }}
 

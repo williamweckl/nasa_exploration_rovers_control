@@ -144,7 +144,7 @@ defmodule NASAExplorationRoversControl.Interactors.InterpretExplorationCommandsI
       end)
 
     if other_exploration_rover_with_the_same_position_index do
-      {:error, "There is something wrong with the initial position of this rover. It is the same as Rover #{other_exploration_rover_with_the_same_position_index + 1} and it is probably wrong as the system prevents rover colisions. Please fix it and try again."}
+      {:error, "There is something wrong with the initial position of this rover. It is the same as Rover #{other_exploration_rover_with_the_same_position_index + 1} and it is probably wrong as the system prevents rover collisions. Please fix it and try again."}
     else
       {:ok, exploration_rover}
     end

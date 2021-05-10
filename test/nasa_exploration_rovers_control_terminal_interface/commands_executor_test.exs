@@ -118,9 +118,9 @@ defmodule NASAExplorationRoversControlTerminalInterface.CommandsExecutorTest do
 
         execution_output = "0 4 N\n0 8 W\nThere is something wrong with the initial position of this rover. " <>
                            "It is the same as Rover 1 and it is probably wrong as the system prevents rover " <>
-                           "colisions. Please fix it and try again.\n1 1 W\nThere is something wrong with the " <>
+                           "collisions. Please fix it and try again.\n1 1 W\nThere is something wrong with the " <>
                            "initial position of this rover. It is the same as Rover 1 and it is probably wrong " <>
-                           "as the system prevents rover colisions. Please fix it and try again.\n" <>
+                           "as the system prevents rover collisions. Please fix it and try again.\n" <>
                            "The system prevented the exploration rover from leaving the ground. " <>
                            "Check the commands and try again. The exploration rover was kept in the " <>
                            "initial position and direction."

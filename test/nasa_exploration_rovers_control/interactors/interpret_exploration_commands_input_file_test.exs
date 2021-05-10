@@ -150,7 +150,7 @@ defmodule NASAExplorationRoversControl.Interactors.InterpretExplorationCommandsI
         exploration_rovers: [
           %NASAExplorationRoversControl.ExplorationRover{commands: ["M", "M", "M", "L", "R", "M"], direction: "N", position: {0, 0}},
           %NASAExplorationRoversControl.ExplorationRover{commands: ["L", "M"], direction: "N", position: {3, 8}},
-          {:error, "There is something wrong with the initial position of this rover. It is the same as Rover 1 and it is probably wrong as the system prevents rover colisions. Please fix it and try again."}
+          {:error, "There is something wrong with the initial position of this rover. It is the same as Rover 1 and it is probably wrong as the system prevents rover collisions. Please fix it and try again."}
         ]
       }}
     end
