@@ -48,6 +48,16 @@ defmodule NASAExplorationRoversControl do
         ]
       }}
 
+      iex> explore_celestial_body_using_commands_from_file("mars", "priv/commands_input_files/mars/exploration_attempt_5_by_kayla_barron_2030_05_11")
+      {:ok, %{
+        ground_size: {10, 11},
+        exploration_rovers: [
+          %#{ExplorationRover}{position: {0, 4}, direction: "N", commands: []},
+          %#{ExplorationRover}{position: {2, 8}, direction: "W", commands: []},
+          %#{ExplorationRover}{position: {2, 8}, direction: "E", commands: []},
+        ]
+      }}
+
       iex> explore_celestial_body_using_commands_from_file("mars", "priv/commands_input_files/mars/exploration_attempt_1_by_kayla_barron_2030_05_08")
       {:error, "The terrain of mars is rectangular and the value entered is a square. Please check your commands."}
 

@@ -10,6 +10,7 @@ defmodule NASAExplorationRoversControlTerminalInterface.CommandsInputFilesMenuTe
     label: "Mars",
     code: "mars"
   }
+  @custom_file_option_code "6"
 
   def assert_show_menu_options do
     assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
@@ -25,7 +26,10 @@ defmodule NASAExplorationRoversControlTerminalInterface.CommandsInputFilesMenuTe
       "4) exploration_attempt_4_by_zena_cardman_2030_05_11"
     )
     assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
-      "5) I prefer to inform another file path"
+      "5) exploration_attempt_5_by_kayla_barron_2030_05_11"
+    )
+    assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
+      "6) I prefer to inform another file path"
     )
   end
 
@@ -108,7 +112,7 @@ defmodule NASAExplorationRoversControlTerminalInterface.CommandsInputFilesMenuTe
           print_message: fn(message) -> message end,
           prompt_user_choice: fn(message) ->
             if message == "Which option would be great for you today?" do
-              "5"
+              @custom_file_option_code
             else
               "my_file_path"
             end
@@ -151,7 +155,7 @@ defmodule NASAExplorationRoversControlTerminalInterface.CommandsInputFilesMenuTe
           [
             typing_effect_print: fn(message) -> message end,
             print_message: fn(message) -> message end,
-            prompt_user_choice: fn(_message) -> "6" end,
+            prompt_user_choice: fn(_message) -> "10" end,
             wait_for_user_reading: fn -> :ok end,
             clear_screen: fn -> :ok end,
             break_line: fn -> :ok end
