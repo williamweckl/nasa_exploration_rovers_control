@@ -11,6 +11,24 @@ defmodule NASAExplorationRoversControlTerminalInterface.CommandsInputFilesMenuTe
     code: "mars"
   }
 
+  def assert_show_menu_options do
+    assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
+      "1) exploration_attempt_1_by_kayla_barron_2030_05_08"
+    )
+    assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
+      "2) exploration_attempt_2_by_zena_cardman_2030_05_09"
+    )
+    assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
+      "3) exploration_attempt_3_by_raja_chari_2030_05_11"
+    )
+    assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
+      "4) exploration_attempt_4_by_zena_cardman_2030_05_11"
+    )
+    assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
+      "5) I prefer to inform another file path"
+    )
+  end
+
   describe "show_menu_and_wait_for_user_interaction/1" do
     test "shows menu to user and persist state after user has chosen first option" do
       with_mock(
@@ -40,18 +58,7 @@ defmodule NASAExplorationRoversControlTerminalInterface.CommandsInputFilesMenuTe
           "We can perform the instructions of a predefined command input file, " <>
           "or if you wish you can inform another file path from your file system."
         )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
-          "1) exploration_attempt_1_by_kayla_barron_2030_05_08"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
-          "2) exploration_attempt_2_by_zena_cardman_2030_05_09"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
-          "3) exploration_attempt_3_by_raja_chari_2030_05_11"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
-          "4) I prefer to inform another file path"
-        )
+        assert_show_menu_options()
         assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
           "Which option would be great for you today?"
         )
@@ -86,18 +93,7 @@ defmodule NASAExplorationRoversControlTerminalInterface.CommandsInputFilesMenuTe
           "We can perform the instructions of a predefined command input file, " <>
           "or if you wish you can inform another file path from your file system."
         )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
-          "1) exploration_attempt_1_by_kayla_barron_2030_05_08"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
-          "2) exploration_attempt_2_by_zena_cardman_2030_05_09"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
-          "3) exploration_attempt_3_by_raja_chari_2030_05_11"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
-          "4) I prefer to inform another file path"
-        )
+        assert_show_menu_options()
         assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
           "Which option would be great for you today?"
         )
@@ -112,7 +108,7 @@ defmodule NASAExplorationRoversControlTerminalInterface.CommandsInputFilesMenuTe
           print_message: fn(message) -> message end,
           prompt_user_choice: fn(message) ->
             if message == "Which option would be great for you today?" do
-              "4"
+              "5"
             else
               "my_file_path"
             end
@@ -137,18 +133,7 @@ defmodule NASAExplorationRoversControlTerminalInterface.CommandsInputFilesMenuTe
           "We can perform the instructions of a predefined command input file, " <>
           "or if you wish you can inform another file path from your file system."
         )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
-          "1) exploration_attempt_1_by_kayla_barron_2030_05_08"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
-          "2) exploration_attempt_2_by_zena_cardman_2030_05_09"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
-          "3) exploration_attempt_3_by_raja_chari_2030_05_11"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
-          "4) I prefer to inform another file path"
-        )
+        assert_show_menu_options()
         assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
           "Which option would be great for you today?"
         )
@@ -166,7 +151,7 @@ defmodule NASAExplorationRoversControlTerminalInterface.CommandsInputFilesMenuTe
           [
             typing_effect_print: fn(message) -> message end,
             print_message: fn(message) -> message end,
-            prompt_user_choice: fn(_message) -> "5" end,
+            prompt_user_choice: fn(_message) -> "6" end,
             wait_for_user_reading: fn -> :ok end,
             clear_screen: fn -> :ok end,
             break_line: fn -> :ok end
@@ -193,18 +178,7 @@ defmodule NASAExplorationRoversControlTerminalInterface.CommandsInputFilesMenuTe
           "We can perform the instructions of a predefined command input file, " <>
           "or if you wish you can inform another file path from your file system."
         )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
-          "1) exploration_attempt_1_by_kayla_barron_2030_05_08"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
-          "2) exploration_attempt_2_by_zena_cardman_2030_05_09"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
-          "3) exploration_attempt_3_by_raja_chari_2030_05_11"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
-          "4) I prefer to inform another file path"
-        )
+        assert_show_menu_options()
         assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
           "Which option would be great for you today?"
         )
@@ -252,18 +226,7 @@ defmodule NASAExplorationRoversControlTerminalInterface.CommandsInputFilesMenuTe
           "We can perform the instructions of a predefined command input file, " <>
           "or if you wish you can inform another file path from your file system."
         )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
-          "1) exploration_attempt_1_by_kayla_barron_2030_05_08"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
-          "2) exploration_attempt_2_by_zena_cardman_2030_05_09"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
-          "3) exploration_attempt_3_by_raja_chari_2030_05_11"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
-          "4) I prefer to inform another file path"
-        )
+        assert_show_menu_options()
         assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
           "Which option would be great for you today?"
         )

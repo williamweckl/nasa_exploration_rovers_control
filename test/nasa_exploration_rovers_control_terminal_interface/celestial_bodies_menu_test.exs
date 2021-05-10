@@ -5,6 +5,24 @@ defmodule NASAExplorationRoversControlTerminalInterface.CelestialBodiesMenuTest 
 
   alias NASAExplorationRoversControlTerminalInterface.CelestialBodiesMenu
 
+  def assert_show_menu_options do
+    assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+      "The system covered celestial bodies for now are:"
+    )
+    assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
+      "1) Mars"
+    )
+  end
+
+  def assert_prompt_message_to_user do
+    assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+      "When you are ready, choose an option from the above list."
+    )
+    assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
+      "Which celestial body do you want to explore today?"
+    )
+  end
+
   describe "show_menu_and_wait_for_user_interaction/1" do
     test "shows menu to user and persist state after user has chosen Mars" do
       with_mock(
@@ -22,18 +40,8 @@ defmodule NASAExplorationRoversControlTerminalInterface.CelestialBodiesMenuTest 
         assert new_state == %{selected_celestial_body: %{code: "mars", id: 1, label: "Mars"}}
 
         assert_called NASAExplorationRoversControlTerminalInterface.IO.clear_screen()
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "The system covered celestial bodies for now are:"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
-          "1) Mars"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "When you are ready, choose an option from the above list."
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
-          "Which celestial body do you want to explore today?"
-        )
+        assert_show_menu_options()
+        assert_prompt_message_to_user()
       end
     end
 
@@ -64,18 +72,8 @@ defmodule NASAExplorationRoversControlTerminalInterface.CelestialBodiesMenuTest 
         assert new_state == %{}
 
         assert_called NASAExplorationRoversControlTerminalInterface.IO.clear_screen()
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "The system covered celestial bodies for now are:"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
-          "1) Mars"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "When you are ready, choose an option from the above list."
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
-          "Which celestial body do you want to explore today?"
-        )
+        assert_show_menu_options()
+        assert_prompt_message_to_user()
         assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Sorry, we do not have this option yet. Maybe in the future."
         )
@@ -111,18 +109,8 @@ defmodule NASAExplorationRoversControlTerminalInterface.CelestialBodiesMenuTest 
         assert new_state == %{}
 
         assert_called NASAExplorationRoversControlTerminalInterface.IO.clear_screen()
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "The system covered celestial bodies for now are:"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
-          "1) Mars"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "When you are ready, choose an option from the above list."
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
-          "Which celestial body do you want to explore today?"
-        )
+        assert_show_menu_options()
+        assert_prompt_message_to_user()
         assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Sorry, we do not have this option yet. Maybe in the future."
         )

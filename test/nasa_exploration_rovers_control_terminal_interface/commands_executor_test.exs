@@ -17,6 +17,28 @@ defmodule NASAExplorationRoversControlTerminalInterface.CommandsExecutorTest do
     code: "mars"
   }
 
+  def assert_show_messages(selected_commands_input_file_path) do
+    assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+      "Good to know!"
+    )
+    assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+      "We will initialize the exploration to Mars now following the " <>
+      "instructions presented at the file `#{selected_commands_input_file_path}`."
+    )
+    assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+      "Take a look at the instructions again. Your commands will take about " <>
+      "8 minutes to be delivered to the Exploration Rovers."
+    )
+    assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+      "Before the execution, the system will try to prevent some common mistakes like " <>
+      "Exploration Rovers getting out from the exploration ground, but it doesn't hurt to take another look."
+    )
+    assert_called_exactly NASAExplorationRoversControlTerminalInterface.IO.wait_for_user_reading(), 2
+    assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+      "These are the commands we will deliver to the Exploration Rovers:"
+    )
+  end
+
   describe "explore_celestial_body_using_commands_from_selected_file/1" do
     test "shows user a summary of the commands that will be performed and after user confirms returns the new state" do
       selected_commands_input_file_path =
@@ -49,25 +71,7 @@ defmodule NASAExplorationRoversControlTerminalInterface.CommandsExecutorTest do
         }
 
         assert_called NASAExplorationRoversControlTerminalInterface.IO.clear_screen()
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "Good to know!"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "We will initialize the exploration to Mars now following the " <>
-          "instructions presented at the file `#{selected_commands_input_file_path}`."
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "Take a look at the instructions again. Your commands will take about " <>
-          "8 minutes to be delivered to the Exploration Rovers."
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "Before the execution, the system will try to prevent some common mistakes like " <>
-          "Exploration Rovers getting out from the exploration ground, but it doesn't hurt to take another look."
-        )
-        assert_called_exactly NASAExplorationRoversControlTerminalInterface.IO.wait_for_user_reading(), 2
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "These are the commands we will deliver to the Exploration Rovers:"
-        )
+        assert_show_messages(selected_commands_input_file_path)
         assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           File.read!(selected_commands_input_file_path)
         )
@@ -127,25 +131,7 @@ defmodule NASAExplorationRoversControlTerminalInterface.CommandsExecutorTest do
         }
 
         assert_called NASAExplorationRoversControlTerminalInterface.IO.clear_screen()
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "Good to know!"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "We will initialize the exploration to Mars now following the " <>
-          "instructions presented at the file `#{selected_commands_input_file_path}`."
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "Take a look at the instructions again. Your commands will take about " <>
-          "8 minutes to be delivered to the Exploration Rovers."
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "Before the execution, the system will try to prevent some common mistakes like " <>
-          "Exploration Rovers getting out from the exploration ground, but it doesn't hurt to take another look."
-        )
-        assert_called_exactly NASAExplorationRoversControlTerminalInterface.IO.wait_for_user_reading(), 2
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "These are the commands we will deliver to the Exploration Rovers:"
-        )
+        assert_show_messages(selected_commands_input_file_path)
         assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           File.read!(selected_commands_input_file_path)
         )
@@ -202,25 +188,7 @@ defmodule NASAExplorationRoversControlTerminalInterface.CommandsExecutorTest do
         assert new_state == :halted
 
         assert_called NASAExplorationRoversControlTerminalInterface.IO.clear_screen()
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "Good to know!"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "We will initialize the exploration to Mars now following the " <>
-          "instructions presented at the file `#{selected_commands_input_file_path}`."
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "Take a look at the instructions again. Your commands will take about " <>
-          "8 minutes to be delivered to the Exploration Rovers."
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "Before the execution, the system will try to prevent some common mistakes like " <>
-          "Exploration Rovers getting out from the exploration ground, but it doesn't hurt to take another look."
-        )
-        assert_called_exactly NASAExplorationRoversControlTerminalInterface.IO.wait_for_user_reading(), 2
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "These are the commands we will deliver to the Exploration Rovers:"
-        )
+        assert_show_messages(selected_commands_input_file_path)
         assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           File.read!(selected_commands_input_file_path)
         )
@@ -268,25 +236,7 @@ defmodule NASAExplorationRoversControlTerminalInterface.CommandsExecutorTest do
         assert new_state == :halted
 
         assert_called NASAExplorationRoversControlTerminalInterface.IO.clear_screen()
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "Good to know!"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "We will initialize the exploration to Mars now following the " <>
-          "instructions presented at the file `#{selected_commands_input_file_path}`."
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "Take a look at the instructions again. Your commands will take about " <>
-          "8 minutes to be delivered to the Exploration Rovers."
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "Before the execution, the system will try to prevent some common mistakes like " <>
-          "Exploration Rovers getting out from the exploration ground, but it doesn't hurt to take another look."
-        )
-        assert_called_exactly NASAExplorationRoversControlTerminalInterface.IO.wait_for_user_reading(), 2
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "These are the commands we will deliver to the Exploration Rovers:"
-        )
+        assert_show_messages(selected_commands_input_file_path)
         assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "Oops. Looks like the informed file does not exist. " <>
           "I'll be gone for now but you can call me again anytime you want."
@@ -328,25 +278,7 @@ defmodule NASAExplorationRoversControlTerminalInterface.CommandsExecutorTest do
         assert new_state == :halted
 
         assert_called NASAExplorationRoversControlTerminalInterface.IO.clear_screen()
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "Good to know!"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "We will initialize the exploration to Mars now following the " <>
-          "instructions presented at the file `#{selected_commands_input_file_path}`."
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "Take a look at the instructions again. Your commands will take about " <>
-          "8 minutes to be delivered to the Exploration Rovers."
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "Before the execution, the system will try to prevent some common mistakes like " <>
-          "Exploration Rovers getting out from the exploration ground, but it doesn't hurt to take another look."
-        )
-        assert_called_exactly NASAExplorationRoversControlTerminalInterface.IO.wait_for_user_reading(), 2
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "These are the commands we will deliver to the Exploration Rovers:"
-        )
+        assert_show_messages(selected_commands_input_file_path)
         assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           File.read!(selected_commands_input_file_path)
         )

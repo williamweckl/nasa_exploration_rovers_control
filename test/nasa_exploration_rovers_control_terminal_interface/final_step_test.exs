@@ -20,6 +20,21 @@ defmodule NASAExplorationRoversControlTerminalInterface.FinalStepTest do
   @selected_commands_input_file_path "priv/commands_input_files/mars/exploration_attempt_2_by_zena_cardman_2030_05_09"
   @execution_output "0 3 N\n0 8 W"
 
+  def assert_show_final_messages_and_prompt do
+    assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+      "So. That's it! We had a great time, what do you think?"
+    )
+    assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+      "What do you want to do now? Go out for a drink?"
+    )
+    assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
+      "Just kidding. We have not finished yet."
+    )
+    assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
+      "Do you want me to save the output to a file? (Y/n)"
+    )
+  end
+
   describe "show_final_user_options_and_wait_for_interaction/1" do
     test "saves file content to disk when user confirms" do
       with_mocks([
@@ -68,18 +83,7 @@ defmodule NASAExplorationRoversControlTerminalInterface.FinalStepTest do
 
         assert new_state == :halted
 
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "So. That's it! We had a great time, what do you think?"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "What do you want to do now? Go out for a drink?"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "Just kidding. We have not finished yet."
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
-          "Do you want me to save the output to a file? (Y/n)"
-        )
+        assert_show_final_messages_and_prompt()
         assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
           "Now I think we have finished. " <>
           "Thank you Xerpa for the opportunity to make me feel challenged again. See you soon. :)"
@@ -124,18 +128,7 @@ defmodule NASAExplorationRoversControlTerminalInterface.FinalStepTest do
 
         assert new_state == :halted
 
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "So. That's it! We had a great time, what do you think?"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "What do you want to do now? Go out for a drink?"
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.typing_effect_print(
-          "Just kidding. We have not finished yet."
-        )
-        assert_called NASAExplorationRoversControlTerminalInterface.IO.prompt_user_choice(
-          "Do you want me to save the output to a file? (Y/n)"
-        )
+        assert_show_final_messages_and_prompt()
         assert_called NASAExplorationRoversControlTerminalInterface.IO.print_message(
           "OK then. Thank you Xerpa for the opportunity to make me feel challenged again. See you soon. :)"
         )
