@@ -80,7 +80,7 @@ Explaining the example:
 
 ### The interface to interact
 
-To interact with the system, for now we have a terminal interface but other ways can be added latter (see the architecture decisions section). You can run using your favorite linux terminal. Maybe it works on Windows and Mac too, but has not been tested.
+To interact with the system, for now we have a terminal interface but other ways can be added later (see the architecture decisions section). You can run using your favorite linux terminal. Maybe it works on Windows and Mac too, but has not been tested.
 
 ![Terminal Interface 1](https://raw.githubusercontent.com/williamweckl/nasa_exploration_rovers_control/master/priv/readme_images/terminal_interface_1.png)
 
