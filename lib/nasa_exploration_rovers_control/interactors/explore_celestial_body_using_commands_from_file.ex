@@ -75,24 +75,19 @@ defmodule NASAExplorationRoversControl.Interactors.ExploreCelestialBodyUsingComm
   end
 
   defp prevent_exploration_rover_to_colide_with_others(
-    %ExplorationRover{position: position} = exploration_rover,
+    %ExplorationRover{} = exploration_rover,
     rover_index,
     exploration_rovers
   ) do
-    other_exploration_rover_with_the_same_position_index = exploration_rovers
-      |> Enum.with_index()
-      |> Enum.find_index(fn {other_exploration_rover, index} ->
-        case other_exploration_rover do
-          %ExplorationRover{} -> other_exploration_rover.position == position && index != rover_index
-          _ -> false
-        end
-      end)
+    collided_exploration_rover_index = NASAExplorationRoversControl.CollisionChecker.fetch_collided_rover_index!(
+      exploration_rover, rover_index, exploration_rovers
+    )
 
-    if other_exploration_rover_with_the_same_position_index do
+    if collided_exploration_rover_index do
       {
         :error,
         "The system prevented this rover to colide with Rover " <>
-        "#{other_exploration_rover_with_the_same_position_index + 1}. After the movements, this would happen. " <>
+        "#{collided_exploration_rover_index + 1}. After the movements, this would happen. " <>
         "Please fix it and try again."
       }
     else

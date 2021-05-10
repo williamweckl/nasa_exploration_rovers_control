@@ -132,19 +132,19 @@ defmodule NASAExplorationRoversControl.Interactors.InterpretExplorationCommandsI
   defp give_commands_to_exploration_rover({:error, _error_message} = error_result), do: error_result
 
   defp validate_exploration_rover_initial_position_comparing_to_others(
-    {:ok, %ExplorationRover{position: position} = exploration_rover}, row_index, exploration_rovers
+    {:ok, %ExplorationRover{} = exploration_rover}, rover_index, exploration_rovers
   ) do
-    other_exploration_rover_with_the_same_position_index = exploration_rovers
-      |> Enum.with_index()
-      |> Enum.find_index(fn {other_exploration_rover, index} ->
-        case other_exploration_rover do
-          %ExplorationRover{} -> other_exploration_rover.position == position && index != row_index
-          _ -> false
-        end
-      end)
+    collided_exploration_rover_index = NASAExplorationRoversControl.CollisionChecker.fetch_collided_rover_index!(
+      exploration_rover, rover_index, exploration_rovers
+    )
 
-    if other_exploration_rover_with_the_same_position_index do
-      {:error, "There is something wrong with the initial position of this rover. It is the same as Rover #{other_exploration_rover_with_the_same_position_index + 1} and it is probably wrong as the system prevents rover collisions. Please fix it and try again."}
+    if collided_exploration_rover_index do
+      {
+        :error,
+        "There is something wrong with the initial position of this rover. " <>
+        "It is the same as Rover #{collided_exploration_rover_index + 1} " <>
+        "and it is probably wrong as the system prevents rover collisions. Please fix it and try again."
+      }
     else
       {:ok, exploration_rover}
     end
